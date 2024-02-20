@@ -1,10 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api, unnecessary_this
+// ignore_for_file: library_private_types_in_public_api, unnecessary_this, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Constants/constats.dart';
-// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:image_picker/image_picker.dart';
 

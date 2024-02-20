@@ -40,6 +40,8 @@ dependencies:
   table_calendar: ^3.1.0
   image_picker: ^1.0.7
   fluttertoast: ^8.2.4
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.5
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,9 @@ flutter:
     - assets/Icons/filter.svg
     - assets/Icons/calendar.svg
     - assets/Icons/image.svg
+    - assets/Icons/edit.svg
+    - assets/Icons/clock.svg
+    - assets/Icons/trash.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
