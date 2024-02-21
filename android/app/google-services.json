@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "482864325783",
-    "project_id": "to-do-list-78cb2",
-    "storage_bucket": "to-do-list-78cb2.appspot.com"
+    "project_number": "279446641758",
+    "project_id": "to-do-list-f76b0",
+    "storage_bucket": "to-do-list-f76b0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:482864325783:android:f8ed89ff099de79a59f5d2",
+        "mobilesdk_app_id": "1:279446641758:android:780b850f102fdb0c4168cf",
         "android_client_info": {
           "package_name": "com.example.to_do_list"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAdDLNE4O-gM867QQg3TVGfXDyX0j5JzZ0"
+          "current_key": "AIzaSyCBOXNK1C18Wfcj5hZyzPJ79OH5XWM3fig"
         }
       ],
       "services": {
