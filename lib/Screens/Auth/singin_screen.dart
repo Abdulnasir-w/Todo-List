@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Screens/Auth/sigup_screen.dart';
+import 'package:to_do_list/Screens/Screens/home_screen.dart';
 
 import '../../Components/custom_textfield.dart';
 import 'forgot_password_screen.dart';
@@ -75,7 +76,12 @@ class SignInScreen extends StatelessWidget {
                       height: 10,
                     ),
                     MyCustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()));
+                      },
                       title: "SIGN IN",
                       color: primaryColor,
                       colorText: textColor,

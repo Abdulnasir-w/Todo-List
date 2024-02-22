@@ -114,8 +114,8 @@ class _MyCustomTextFieldState extends State<MyCustomTextField> {
                   },
                   icon: Icon(
                     isVisible
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: hasFocus ? primaryColor : Colors.grey,
                   ),
                 )
