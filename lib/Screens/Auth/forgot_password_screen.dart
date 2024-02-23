@@ -10,6 +10,7 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
@@ -17,62 +18,67 @@ class ForgotPasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 180,
-              ),
-              Center(
-                  child: SvgPicture.asset(
-                "assets/Logo/Login Pic.svg",
-                width: 187,
-                height: 180,
-              )),
-              const SizedBox(
-                height: 250,
-              ),
-              Column(
-                children: [
-                  MyCustomTextField(
-                    title: "Password",
-                    controller: passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    isPassField: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Password";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  MyCustomTextField(
-                    title: "Confirm Password",
-                    controller: confirmPasswordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    isPassField: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Confirm Password";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  MyCustomButton(
-                    onPressed: () {},
-                    title: "CHANGE PASSWORD",
-                    color: primaryColor,
-                    colorText: textColor,
-                  ),
-                ],
-              ),
-            ],
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 180,
+                ),
+                Center(
+                    child: SvgPicture.asset(
+                  "assets/Logo/Login Pic.svg",
+                  width: 187,
+                  height: 180,
+                )),
+                const SizedBox(
+                  height: 250,
+                ),
+                Column(
+                  children: [
+                    MyCustomTextField(
+                      title: "Password",
+                      controller: passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      isPassField: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MyCustomTextField(
+                      title: "Confirm Password",
+                      controller: confirmPasswordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      isPassField: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Confirm Password";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    MyCustomButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {}
+                      },
+                      title: "CHANGE PASSWORD",
+                      color: primaryColor,
+                      colorText: textColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

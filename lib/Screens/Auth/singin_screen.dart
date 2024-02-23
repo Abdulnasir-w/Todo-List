@@ -13,6 +13,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
@@ -22,107 +23,111 @@ class SignInScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 180,
-                ),
-                Center(
-                    child: SvgPicture.asset(
-                  "assets/Logo/Login Pic.svg",
-                  width: 187,
-                  height: 180,
-                )),
-                const SizedBox(
-                  height: 150,
-                ),
-                Column(
-                  children: [
-                    MyCustomTextField(
-                      title: 'Email',
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Enter Email";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    MyCustomTextField(
-                      title: "Password",
-                      controller: passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      isPassField: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Enter Password";
-                        }
-                        return null;
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPasswordScreen()));
-                          },
-                          child: Text(
-                            "Forgot Password?",
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 180,
+                  ),
+                  Center(
+                      child: SvgPicture.asset(
+                    "assets/Logo/Login Pic.svg",
+                    width: 187,
+                    height: 180,
+                  )),
+                  const SizedBox(
+                    height: 150,
+                  ),
+                  Column(
+                    children: [
+                      MyCustomTextField(
+                        title: 'Email',
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Email";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      MyCustomTextField(
+                        title: "Password",
+                        controller: passwordController,
+                        keyboardType: TextInputType.visiblePassword,
+                        isPassField: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Password";
+                          }
+                          return null;
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ForgotPasswordScreen()));
+                              }
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: primaryStyle,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      MyCustomButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomeScreen()));
+                        },
+                        title: "SIGN IN",
+                        color: primaryColor,
+                        colorText: textColor,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?",
                             style: primaryStyle,
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    MyCustomButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                      },
-                      title: "SIGN IN",
-                      color: primaryColor,
-                      colorText: textColor,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account?",
-                          style: primaryStyle,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignUpScreen()));
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: txtBtnColor,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignUpScreen()));
+                            },
+                            child: Text(
+                              "Sign Up",
+                              style: txtBtnColor,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
