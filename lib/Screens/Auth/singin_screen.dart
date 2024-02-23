@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/sign_in_model.dart';
@@ -9,12 +12,18 @@ import 'package:to_do_list/Screens/Screens/home_screen.dart';
 import '../../Components/custom_textfield.dart';
 import 'forgot_password_screen.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
   @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    bool isLoading = false;
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
@@ -91,19 +100,36 @@ class SignInScreen extends StatelessWidget {
                         height: 30,
                       ),
                       MyCustomButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            SignIn.signIn(
-                                emailController.text, passwordController.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()));
+                            setState(() {
+                              isLoading = true;
+                            });
+                            try {
+                              SignIn signIn = SignIn();
+                              await signIn.signInWithEmailAndPassword(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                              Fluttertoast.showToast(msg: "Login Successfully");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeScreen()));
+                            } catch (e) {
+                              rethrow;
+                            } finally {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
                           }
                         },
                         title: "SIGN IN",
                         color: primaryColor,
                         colorText: textColor,
+                        isLoading: isLoading,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -15,6 +16,7 @@ class SignUp {
         email: email,
         password: password,
       );
+      await saveTokenLocaly(userCredential.user!.uid);
       if (userCredential.user != null) {
         userCredential.user!.displayName!;
       }
@@ -25,16 +27,36 @@ class SignUp {
     }
   }
 
+  //Get the save authentication Token
+  Future<void> saveTokenLocaly(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("userToken", token);
+  }
+
+  // Get the save authentication Token
+  Future<String?> getSavedToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("userToken");
+  }
+
   //Get the current user
   User? getCurrentUser() {
     return firebaseAuth.currentUser;
   }
 
-  // Get the Current user Token
-  Future<String?> getCurrentUserToken() async {}
+  // Get the Current User Token
+  Future<String?> getCurrentUserToken() async {
+    User? user = firebaseAuth.currentUser;
+    if (user != null) {
+      return await user.getIdToken();
+    }
+    return null;
+  }
 
   // Sign Out
   Future<void> signOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userToken');
     return firebaseAuth.signOut();
   }
 }
