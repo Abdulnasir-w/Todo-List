@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import 'package:to_do_list/Model/Auth/sign_in_model.dart';
 import 'package:to_do_list/Screens/Auth/sigup_screen.dart';
 import 'package:to_do_list/Screens/Screens/home_screen.dart';
 
@@ -73,13 +74,11 @@ class SignInScreen extends StatelessWidget {
                         children: [
                           TextButton(
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ForgotPasswordScreen()));
-                              }
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ForgotPasswordScreen()));
                             },
                             child: Text(
                               "Forgot Password?",
@@ -93,10 +92,14 @@ class SignInScreen extends StatelessWidget {
                       ),
                       MyCustomButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                          if (formKey.currentState!.validate()) {
+                            SignIn.signIn(
+                                emailController.text, passwordController.text);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()));
+                          }
                         },
                         title: "SIGN IN",
                         color: primaryColor,
