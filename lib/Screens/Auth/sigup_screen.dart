@@ -6,8 +6,8 @@ import 'package:to_do_list/Screens/Auth/singin_screen.dart';
 
 import '../../Components/custom_textfield.dart';
 
-class SignUnScreen extends StatelessWidget {
-  const SignUnScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -22,7 +22,7 @@ class MyCustomTextField extends StatefulWidget {
 
 class _MyCustomTextFieldState extends State<MyCustomTextField> {
   late FocusNode _focusNode;
-  bool isVisible = false; // Initialize isVisible to false
+  bool isVisible = true; // Initialize isVisible to false
 
   @override
   void initState() {

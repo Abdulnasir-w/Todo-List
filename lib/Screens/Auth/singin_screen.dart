@@ -73,7 +73,7 @@ class SignInScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     MyCustomButton(
                       onPressed: () {
