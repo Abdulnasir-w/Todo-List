@@ -41,9 +41,15 @@ class SignInScreen extends StatelessWidget {
                 Column(
                   children: [
                     MyCustomTextField(
-                      title: 'Login',
+                      title: 'Email',
                       keyboardType: TextInputType.emailAddress,
                       controller: emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Enter Email";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -53,6 +59,12 @@ class SignInScreen extends StatelessWidget {
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       isPassField: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Enter Password";
+                        }
+                        return null;
+                      },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -99,7 +111,7 @@ class SignInScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const SignUnScreen()));
+                                        const SignUpScreen()));
                           },
                           child: Text(
                             "Sign Up",

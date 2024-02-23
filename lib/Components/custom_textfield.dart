@@ -7,6 +7,7 @@ class MyCustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final bool isPassField;
+  final String? Function(String?)? validator;
 
   const MyCustomTextField({
     super.key,
@@ -14,6 +15,7 @@ class MyCustomTextField extends StatefulWidget {
     required this.title,
     this.controller,
     this.isPassField = false,
+    this.validator,
   });
 
   @override
@@ -44,84 +46,80 @@ class _MyCustomTextFieldState extends State<MyCustomTextField> {
   @override
   Widget build(BuildContext context) {
     bool hasFocus = _focusNode.hasFocus;
-    return SizedBox(
-      width: 500,
-      height: 50,
-      child: TextFormField(
-        obscureText: widget.isPassField
-            ? isVisible
-            : false, // Toggle the visibility based on isVisible
-        controller: widget.controller,
-        focusNode: _focusNode,
-        keyboardType: widget.keyboardType,
-        style: GoogleFonts.montserrat(
-          color: Colors.black,
+    return TextFormField(
+      obscureText: widget.isPassField
+          ? isVisible
+          : false, // Toggle the visibility based on isVisible
+      controller: widget.controller,
+      focusNode: _focusNode,
+      cursorColor: primaryColor,
+      cursorErrorColor: Colors.red,
+      keyboardType: widget.keyboardType,
+      inputFormatters: const [],
+      style: GoogleFonts.montserrat(
+        color: primaryColor,
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+      ),
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        hintText: widget.title,
+        hintStyle: GoogleFonts.montserrat(
+          color: hasFocus ? primaryColor : Colors.black38,
           fontWeight: FontWeight.w500,
           fontSize: 16,
         ),
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          filled: true,
-          hintText: widget.title,
-          hintStyle: GoogleFonts.montserrat(
-            color: hasFocus ? primaryColor : Colors.black38,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+
+        border: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 1.5,
+            color: Colors.grey,
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 25),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: primaryColor,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              width: 2,
-              color: Colors.grey,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: primaryColor,
-              width: 2,
-              style: BorderStyle.solid,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 3,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 3,
-            ),
-          ),
-          suffixIcon: widget.isPassField
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isVisible =
-                          !isVisible; // Toggle isVisible when the button is pressed
-                    });
-                  },
-                  icon: Icon(
-                    isVisible
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: hasFocus ? primaryColor : Colors.grey,
-                  ),
-                )
-              : null, // Don't show a suffix icon if it's not a password field
+          borderRadius: BorderRadius.circular(12),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+            style: BorderStyle.solid,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 2.0,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 2.0,
+          ),
+        ),
+        suffixIcon: widget.isPassField
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    isVisible =
+                        !isVisible; // Toggle isVisible when the button is pressed
+                  });
+                },
+                icon: Icon(
+                  isVisible
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: hasFocus ? primaryColor : Colors.grey,
+                ),
+              )
+            : null, // Don't show a suffix icon if it's not a password field
       ),
+      validator: widget.validator,
     );
   }
 }

@@ -39,6 +39,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     isPassField: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -48,6 +54,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                     controller: confirmPasswordController,
                     keyboardType: TextInputType.visiblePassword,
                     isPassField: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Confirm Password";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 40,
