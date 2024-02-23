@@ -1,21 +1,40 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp {
-  static void signUp(emailController, String passwordController,
-      String userNameController) async {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  // SignUp with username, email and password
+  Future<UserCredential> signUpWithEmailandPassword(
+    String username,
+    String email,
+    String password,
+  ) async {
     try {
       UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController,
-        password: passwordController,
+          await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
       );
-      await userCredential.user?.sendEmailVerification();
-      Fluttertoast.showToast(msg: "Account is Created successfully");
-      await userCredential.user?.reload();
+      if (userCredential.user != null) {
+        userCredential.user!.displayName!;
+      }
+
+      return userCredential;
     } catch (e) {
-      Fluttertoast.showToast(msg: "Account Cannot Created !");
       throw Exception(e);
     }
+  }
+
+  //Get the current user
+  User? getCurrentUser() {
+    return firebaseAuth.currentUser;
+  }
+
+  // Get the Current user Token
+  Future<String?> getCurrentUserToken() async {}
+
+  // Sign Out
+  Future<void> signOut() async {
+    return firebaseAuth.signOut();
   }
 }

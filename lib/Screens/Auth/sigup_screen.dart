@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/sign_up_model.dart';
 import 'package:to_do_list/Screens/Auth/singin_screen.dart';
+import 'package:to_do_list/Screens/Screens/home_screen.dart';
 
 import '../../Components/custom_textfield.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    bool isLoading = false;
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController userNameController = TextEditingController();
@@ -103,23 +111,40 @@ class SignUpScreen extends StatelessWidget {
                         height: 70,
                       ),
                       MyCustomButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            SignUp.signUp(
-                              emailController.text,
-                              passwordController.text,
-                              userNameController.text,
-                            );
-                            Navigator.push(
+                            setState(() {
+                              isLoading = true;
+                            });
+                            try {
+                              await SignUp().signUpWithEmailandPassword(
+                                userNameController.text,
+                                emailController.text,
+                                passwordController.text,
+                              );
+                              Fluttertoast.showToast(
+                                  msg: "Account Created Successfully");
+                              Navigator.push(
+                                // ignore: use_build_context_synchronously
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignInScreen()));
+                                  builder: ((context) => const HomeScreen()),
+                                ),
+                              );
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: "Cannot Create Account . Sorry!");
+                            } finally {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
                           }
                         },
                         title: "SIGN UP",
                         color: primaryColor,
                         colorText: textColor,
+                        isLoading: isLoading,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
