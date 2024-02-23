@@ -11,6 +11,7 @@ class EditTodoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     return Scaffold(
       backgroundColor: scaffoldbg,
       appBar: const DetailsScreenAppbar(),
@@ -67,6 +68,7 @@ class EditTodoScreen extends StatelessWidget {
                     title: "EDIT TODO",
                     color: Colors.white,
                     colorText: primaryColor,
+                    isLoading: isLoading,
                   ),
                 ],
               ),

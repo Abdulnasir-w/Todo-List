@@ -11,6 +11,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    bool isLoading = false;
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
@@ -74,6 +75,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       title: "CHANGE PASSWORD",
                       color: primaryColor,
                       colorText: textColor,
+                      isLoading: isLoading,
                     ),
                   ],
                 ),

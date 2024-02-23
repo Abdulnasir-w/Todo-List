@@ -10,6 +10,7 @@ class AddTodoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     return Scaffold(
       backgroundColor: scaffoldbg,
       appBar: const CustomAppbar(),
@@ -66,6 +67,7 @@ class AddTodoScreen extends StatelessWidget {
                     title: "ADD TODO",
                     color: Colors.white,
                     colorText: primaryColor,
+                    isLoading: isLoading,
                   ),
                 ],
               ),
