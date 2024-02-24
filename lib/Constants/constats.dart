@@ -8,7 +8,7 @@ Color textColor = const Color(0xffF0F0F0);
 
 TextStyle primaryStyle = GoogleFonts.montserrat(
   color: Colors.black38,
-  fontSize: 14,
+  fontSize: 16,
 );
 
 TextStyle secondryStyle = GoogleFonts.montserrat(
@@ -30,3 +30,11 @@ TextStyle menuTextStyleSecondry = GoogleFonts.montserrat(
 
 TextStyle addHintStyle = GoogleFonts.montserrat(
     fontSize: 16, color: scaffoldbg, fontWeight: FontWeight.w400);
+
+// Profile Screen Text Style
+
+TextStyle nameStyle = GoogleFonts.montserrat(
+  color: primaryColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w300,
+);

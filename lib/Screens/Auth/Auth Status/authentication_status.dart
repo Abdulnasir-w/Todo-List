@@ -24,14 +24,18 @@ class _AuthenticationStatusState extends State<AuthenticationStatus> {
 
   Future<void> checkAuthStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
+    String? token = prefs.getString("userToken");
 
     setState(() {
-      isLoading = false;
+      isLoading = true;
     });
-    if (isLoggedIn) {
+    if (token != null && token.isNotEmpty) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } else {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
