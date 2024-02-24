@@ -125,25 +125,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {
                               isLoading = true;
                             });
-                            try {
-                              await SignUp().signUpWithEmailandPassword(
-                                userNameController.text,
-                                emailController.text,
-                                passwordController.text,
-                              );
+                            if (passwordController.text ==
+                                confirmPasswordController.text) {
+                              try {
+                                await SignUp().signUpWithEmailandPassword(
+                                  userNameController.text,
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                                Fluttertoast.showToast(
+                                    msg: "Account Created Successfully");
+                                Navigator.push(
+                                  // ignore: use_build_context_synchronously
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: ((context) => const HomeScreen()),
+                                  ),
+                                );
+                              } catch (e) {
+                                Fluttertoast.showToast(
+                                    msg: "Cannot Create Account . Sorry!");
+                              } finally {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              }
+                            } else {
                               Fluttertoast.showToast(
-                                  msg: "Account Created Successfully");
-                              Navigator.push(
-                                // ignore: use_build_context_synchronously
-                                context,
-                                MaterialPageRoute(
-                                  builder: ((context) => const HomeScreen()),
-                                ),
-                              );
-                            } catch (e) {
-                              Fluttertoast.showToast(
-                                  msg: "Cannot Create Account . Sorry!");
-                            } finally {
+                                  msg: "Password is not Matching.");
                               setState(() {
                                 isLoading = false;
                               });

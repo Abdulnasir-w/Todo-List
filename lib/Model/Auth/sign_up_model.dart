@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp {
@@ -18,7 +19,10 @@ class SignUp {
       );
       await saveTokenLocaly(userCredential.user!.uid);
       if (userCredential.user != null) {
-        userCredential.user!.displayName!;
+        String? displayName = userCredential.user!.displayName;
+        if (displayName != null) {
+          Fluttertoast.showToast(msg: 'User display name: $displayName');
+        }
       }
 
       return userCredential;
