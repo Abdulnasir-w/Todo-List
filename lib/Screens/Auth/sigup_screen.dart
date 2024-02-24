@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Components/custom_button.dart';
@@ -6,6 +7,7 @@ import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/sign_up_model.dart';
 import 'package:to_do_list/Screens/Auth/singin_screen.dart';
 import 'package:to_do_list/Screens/Screens/home_screen.dart';
+import 'package:to_do_list/Utils/custom_pop.dart';
 
 import '../../Components/custom_textfield.dart';
 
@@ -17,20 +19,27 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    bool isLoading = false;
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController userNameController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
-
-    return Scaffold(
-      backgroundColor: scaffoldbg,
-      body: PopScope(
-        canPop: true,
-        child: Padding(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          return;
+        } else {
+          Pop.showBackDialog(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: scaffoldbg,
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
           child: SingleChildScrollView(
             child: Form(
@@ -39,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 130,
+                    height: 110,
                   ),
                   Center(
                       child: SvgPicture.asset(
@@ -48,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 180,
                   )),
                   const SizedBox(
-                    height: 100,
+                    height: 80,
                   ),
                   Column(
                     children: [
@@ -64,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 17,
                       ),
                       MyCustomTextField(
                         title: 'Full Name',
@@ -78,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 17,
                       ),
                       MyCustomTextField(
                         title: "Password",
@@ -93,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 17,
                       ),
                       MyCustomTextField(
                         title: "Congirm Password",
@@ -108,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 70,
+                        height: 50,
                       ),
                       MyCustomButton(
                         onPressed: () async {

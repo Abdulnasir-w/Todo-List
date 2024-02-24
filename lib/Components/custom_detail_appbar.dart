@@ -12,7 +12,6 @@ class DetailsScreenAppbar extends StatefulWidget
   State<DetailsScreenAppbar> createState() => _DetailsScreenAppbarState();
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 

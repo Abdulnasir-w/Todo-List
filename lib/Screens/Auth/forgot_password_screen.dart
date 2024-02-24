@@ -15,13 +15,13 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    bool isLoading = false;
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
       backgroundColor: scaffoldbg,
       body: Padding(
