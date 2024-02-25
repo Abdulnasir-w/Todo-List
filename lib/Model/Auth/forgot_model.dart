@@ -6,7 +6,7 @@ class ForgotPassword {
     try {
       await firebaseAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      //print("Forgot error : $e");
+      print("Forgot error : $e");
       throw Exception(e);
     }
   }

@@ -37,11 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 300,
             ),
             const SizedBox(
-              height: 40,
+              height: 50,
             ),
             const NameAndEmailDetails(),
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             MyCustomButton(
               onPressed: () async {

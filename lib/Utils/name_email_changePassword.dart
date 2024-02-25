@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Constants/constats.dart';
-import 'package:to_do_list/Screens/Auth/forgot_password_screen.dart';
+import 'package:to_do_list/Screens/Screens/change_password_screen.dart';
 
 class NameAndEmailDetails extends StatefulWidget {
   const NameAndEmailDetails({super.key});
@@ -98,7 +98,7 @@ class _NameAndEmailDetailsState extends State<NameAndEmailDetails> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const ForgotPasswordScreen()));
+                                    const ChangePasswordScreen()));
                       },
                       child: Text(
                         "Change Password",
