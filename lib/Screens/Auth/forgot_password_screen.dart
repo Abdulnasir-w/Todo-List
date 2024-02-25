@@ -106,7 +106,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Fluttertoast.showToast(
                                   msg: "Password Reset Successfully");
                             } catch (e) {
-                              print('Error : $e');
+                              //print('Error : $e');
                               rethrow;
                             } finally {
                               setState(() {

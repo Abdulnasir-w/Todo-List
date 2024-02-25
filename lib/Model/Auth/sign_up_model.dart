@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp {
@@ -18,12 +17,7 @@ class SignUp {
         password: password,
       );
       await saveTokenLocaly(userCredential.user!.uid);
-      if (userCredential.user != null) {
-        String? displayName = userCredential.user!.displayName;
-        if (displayName != null) {
-          Fluttertoast.showToast(msg: 'User display name: $displayName');
-        }
-      }
+      await userCredential.user?.updateDisplayName(username);
 
       return userCredential;
     } catch (e) {
@@ -41,11 +35,6 @@ class SignUp {
   Future<String?> getSavedToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("userToken");
-  }
-
-  //Get the current user
-  User? getCurrentUser() {
-    return firebaseAuth.currentUser;
   }
 
   // Get the Current User Token

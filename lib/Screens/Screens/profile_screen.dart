@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -47,6 +49,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   isLoading = true;
                 });
                 try {
+                  await Future.delayed(
+                    const Duration(
+                      seconds: 3,
+                    ),
+                  );
                   await SignUp().signOut();
                   Fluttertoast.showToast(msg: "Log Out Successfully ");
                   Navigator.pushReplacement(
