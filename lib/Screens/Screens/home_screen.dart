@@ -7,8 +7,25 @@ import 'package:to_do_list/Screens/Screens/add_todo_screen.dart';
 import 'package:to_do_list/Utils/custom_pop.dart';
 import 'package:to_do_list/Utils/custom_popmenu.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,36 +41,40 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: scaffoldbg,
         appBar: const CustomAppbar(),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset("assets/Icons/list icon.svg"),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "LIST OF TODO",
-                      style: GoogleFonts.bebasNeue(
-                          fontSize: 36, color: secondryColor),
+        body: isLoading
+            ? CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+              )
+            : Padding(
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/Icons/list icon.svg"),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "LIST OF TODO",
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 36, color: secondryColor),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 141,
+                        ), // Add Spacer to push CustomPopMenuButton to the end
+                        const CustomPopMenuButton(),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    width: 141,
-                  ), // Add Spacer to push CustomPopMenuButton to the end
-                  const CustomPopMenuButton(),
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-        ),
         floatingActionButton: IconButton(
           onPressed: () {
             Navigator.push(

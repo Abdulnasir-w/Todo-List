@@ -23,76 +23,80 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldbg,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 180,
-                ),
-                Center(
-                    child: SvgPicture.asset(
-                  "assets/Logo/Login Pic.svg",
-                  width: 187,
-                  height: 180,
-                )),
-                const SizedBox(
-                  height: 150,
-                ),
-                Column(
-                  children: [
-                    MyCustomTextField(
-                      title: "Email",
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Enter Email";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    MyCustomButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          setState(() {
-                            isLoading = true;
-                          });
-
-                          try {
-                            await ForgotPassword().resetPassword(
-                              emailController.text,
-                            );
-                            Fluttertoast.showToast(
-                                msg:
-                                    "Reset Email Has Been Sent Plz check your Email.");
-                          } catch (e) {
-                            rethrow;
-                          } finally {
-                            setState(() {
-                              isLoading = false;
-                            });
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 180,
+                  ),
+                  Center(
+                      child: SvgPicture.asset(
+                    "assets/Logo/Login Pic.svg",
+                    width: 187,
+                    height: 180,
+                  )),
+                  const SizedBox(
+                    height: 150,
+                  ),
+                  Column(
+                    children: [
+                      MyCustomTextField(
+                        title: "Email",
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Email";
                           }
-                        }
-                      },
-                      title: "FORGOT PASSWORD",
-                      color: primaryColor,
-                      colorText: textColor,
-                      isLoading: isLoading,
-                    ),
-                  ],
-                ),
-              ],
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      MyCustomButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            setState(() {
+                              isLoading = true;
+                            });
+
+                            try {
+                              await ForgotPassword().resetPassword(
+                                emailController.text,
+                              );
+                              await Future.delayed(const Duration(seconds: 3));
+                              Navigator.pop(context);
+                              Fluttertoast.showToast(
+                                  msg:
+                                      "Reset Email Has Been Sent Plz check your Email.");
+                            } catch (e) {
+                              rethrow;
+                            } finally {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
+                          }
+                        },
+                        title: "FORGOT PASSWORD",
+                        color: primaryColor,
+                        colorText: textColor,
+                        isLoading: isLoading,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
