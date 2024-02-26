@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/forgot_model.dart';
+import 'package:to_do_list/Screens/Auth/code_screen.dart';
 
 import '../../Components/custom_textfield.dart';
 
@@ -96,17 +96,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           setState(() {
                             isLoading = true;
                           });
-                          if (passwordController.toString() ==
-                              confirmPasswordController.toString()) {
+                          if (passwordController.text ==
+                              confirmPasswordController.text) {
                             try {
-                              await ForgotPassword().resetPassword(
+                              String newPassword =
+                                  await ForgotPassword().resetPassword(
                                 emailController.text,
                                 passwordController.text,
                               );
-                              Fluttertoast.showToast(
-                                  msg: "Password Reset Successfully");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CodeScreen(newPassword: newPassword),
+                                ),
+                              );
                             } catch (e) {
-                              //print('Error : $e');
                               rethrow;
                             } finally {
                               setState(() {
