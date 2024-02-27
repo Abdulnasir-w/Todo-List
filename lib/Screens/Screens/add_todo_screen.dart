@@ -92,16 +92,17 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                     height: 30,
                   ),
                   MyCustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       setState(() {
                         isLoading = true;
                       });
                       try {
-                        AddTodo().addTodo(
+                        await AddTodo().addTodo(
                             titleController.text,
                             descriptionController.text,
                             selectedDate,
                             selectedImage);
+                        Navigator.pop(context);
                       } catch (e) {
                         throw Exception(e);
                       } finally {
