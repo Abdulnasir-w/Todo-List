@@ -5,6 +5,8 @@ class AddTodo {
   final CollectionReference<Map<String, dynamic>> todo =
       FirebaseFirestore.instance.collection("Todo List".toString());
   int id = 1;
+
+  // By ID
   Future<void> addTodo(
     String title,
     String description,
@@ -25,10 +27,13 @@ class AddTodo {
         'image': image,
         // Other fields...
       });
+      Fluttertoast.showToast(msg: "Add Successfully");
     } catch (e) {
-      print('Error adding todo: $e');
+      Fluttertoast.showToast(msg: "Cannot Add Please Try Again");
     }
   }
+
+  // By document name is title
   // void addTodo(String title, String description, selectedDate, selectedImage) {
   //   // Define the data to be added
   //   Map<String, dynamic> todoData = {

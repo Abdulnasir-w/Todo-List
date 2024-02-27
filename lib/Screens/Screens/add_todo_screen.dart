@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
