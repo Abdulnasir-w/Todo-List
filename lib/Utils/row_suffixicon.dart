@@ -10,11 +10,15 @@ import 'package:image_picker/image_picker.dart';
 class MyRowSuffix extends StatefulWidget {
   final String title;
   final String asset;
+  final Function(String)? onImageSelected;
+  final Function(String)? onDateSelected;
 
   const MyRowSuffix({
     super.key,
     required this.title,
     required this.asset,
+    this.onDateSelected,
+    this.onImageSelected,
   });
 
   @override
@@ -74,6 +78,7 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
     if (selectDate != null) {
       setState(() {
         dateSelect = DateFormat('dd-MM-yyyy').format(selectDate);
+        widget.onDateSelected!(dateSelect!);
       });
     }
   }
@@ -88,6 +93,7 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
       String fileName = pickedFile.path.split("/").last;
       setState(() {
         imageName = fileName;
+        widget.onImageSelected!(pickedFile.path);
       });
     }
   }

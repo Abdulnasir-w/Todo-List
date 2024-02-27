@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Custom tab bar,
                     Row(
                       children: [
                         SvgPicture.asset("assets/Icons/list icon.svg"),
@@ -65,13 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(
                           width: 141,
-                        ), // Add Spacer to push CustomPopMenuButton to the end
+                        ), 
                         const CustomPopMenuButton(),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    //
                   ],
                 ),
               ),

@@ -3,14 +3,39 @@ import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import '../../Model/Todo Models/add_model.dart';
 import '../../Utils/row_suffixicon.dart';
 
-class AddTodoScreen extends StatelessWidget {
+class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key});
 
   @override
+  State<AddTodoScreen> createState() => _AddTodoScreenState();
+}
+
+class _AddTodoScreenState extends State<AddTodoScreen> {
+  bool isLoading = false;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  String? selectedDate;
+  String? selectedImage;
+
+  // for date
+  void updateSelectedDate(String date) {
+    setState(() {
+      selectedDate = date;
+    });
+  }
+
+  // for image
+  void updateSelectedImage(String image) {
+    setState(() {
+      selectedImage = image;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
     return Scaffold(
       backgroundColor: scaffoldbg,
       appBar: const CustomAppbar(),
@@ -31,39 +56,60 @@ class AddTodoScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const AddingTextField(
+                  AddingTextField(
                     width: 500,
                     height: 55,
                     title: 'Title',
+                    controller: titleController,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const AddingTextField(
+                  AddingTextField(
                     width: 500,
                     height: 400,
                     title: 'Description',
+                    controller: descriptionController,
                     lines: 50,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const MyRowSuffix(
+                  MyRowSuffix(
                     title: 'Deadline (Optional)',
                     asset: "assets/Icons/calendar.svg",
+                    onDateSelected: updateSelectedDate,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const MyRowSuffix(
+                  MyRowSuffix(
                     title: 'Add Image (Optional)',
                     asset: "assets/Icons/image.svg",
+                    onImageSelected: updateSelectedImage,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   MyCustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      try {
+                        AddTodo().addTodo(
+                            titleController.text,
+                            descriptionController.text,
+                            selectedDate,
+                            selectedImage);
+                      } catch (e) {
+                        throw Exception(e);
+                      } finally {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
                     title: "ADD TODO",
                     color: Colors.white,
                     colorText: primaryColor,
