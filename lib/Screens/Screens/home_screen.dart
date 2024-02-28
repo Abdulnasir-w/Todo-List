@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import 'package:to_do_list/Model/Todo%20Models/fetch_data_model.dart';
 import 'package:to_do_list/Screens/Screens/add_todo_screen.dart';
 import 'package:to_do_list/Utils/custom_pop.dart';
 import 'package:to_do_list/Utils/custom_popmenu.dart';
@@ -16,13 +18,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
-
+  late Future<List<DocumentSnapshot>> todoList;
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
+        todoList = FetchData().fetchData();
       });
     });
   }
@@ -72,8 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(
                       height: 20,
-                    )
+                    ),
                     // Data from FireStore
+                    FutureBuilder<List<DocumentSnapshot>>(
+                      future: todoList,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(primaryColor),
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text("Error: ${snapshot.hasError}"),
+                          );
+                        } else {
+                          final todos = snapshot.data;
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
