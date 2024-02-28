@@ -38,14 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Pop.showBackDialog(context);
         }
       },
-      child: Scaffold(
-        backgroundColor: scaffoldbg,
-        appBar: const CustomAppbar(),
-        body: isLoading
-            ? CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-              )
-            : Padding(
+      child: isLoading
+          ? CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+            )
+          : Scaffold(
+              backgroundColor: scaffoldbg,
+              appBar: const CustomAppbar(),
+              body: Padding(
                 padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,26 +66,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(
                           width: 141,
-                        ), 
+                        ),
                         const CustomPopMenuButton(),
                       ],
                     ),
-                    //
+                    const SizedBox(
+                      height: 20,
+                    )
+                    // Data from FireStore
                   ],
                 ),
               ),
-        floatingActionButton: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddTodoScreen(),
+              floatingActionButton: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddTodoScreen(),
+                    ),
+                  );
+                },
+                icon: SvgPicture.asset("assets/Icons/plus-circle.svg"),
               ),
-            );
-          },
-          icon: SvgPicture.asset("assets/Icons/plus-circle.svg"),
-        ),
-      ),
+            ),
     );
   }
 }

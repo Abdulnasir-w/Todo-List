@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class AddTodo {
   final CollectionReference<Map<String, dynamic>> todo =
-      FirebaseFirestore.instance.collection("Todo List".toString());
+      FirebaseFirestore.instance.collection("Todo List");
   int id = 1;
 
   // By ID
