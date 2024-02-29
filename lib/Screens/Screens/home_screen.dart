@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
@@ -19,17 +20,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
   late Future<List<DocumentSnapshot>> todoList;
+
   @override
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  void fetchData() {
-    setState(() {
-      todoList = FetchData().fetchData();
-      isLoading = false;
-    });
+    todoList = FetchData().fetchData();
   }
 
   @override
@@ -80,31 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   future: todoList,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(primaryColor),
-                        ),
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasError) {
+                      Fluttertoast.showToast(msg: "Error while Data Fetching");
                       return Center(
-                        child: Text("Error: ${snapshot.hasError}"),
+                        child: Text("Error : ${snapshot.hasError}"),
                       );
                     } else {
-                      final todos = snapshot.data;
+                      List<DocumentSnapshot>? data = snapshot.data;
                       return ListView.builder(
-                        itemCount: todos!.length,
-                        itemBuilder: (context, index) {
-                          final todo = todos[index];
-                          return ListTile(
-                            title: Text(
-                              todo['title'],
-                            ),
-                            subtitle: Text(
-                              todo['description'],
+                        itemCount: data?.length ?? 0,
+                        itemBuilder: ((context, index) {
+                          return Container(
+                            width: 330,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: primaryColor,
                             ),
                           );
-                        },
+                        }),
                       );
                     }
                   },
