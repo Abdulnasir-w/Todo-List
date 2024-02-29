@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
-  late Stream<QuerySnapshot> todoList;
+  late Future<List<DocumentSnapshot>> todoList;
   @override
   void initState() {
     super.initState();
