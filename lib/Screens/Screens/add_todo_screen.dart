@@ -17,6 +17,7 @@ class AddTodoScreen extends StatefulWidget {
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
   bool isLoading = false;
+  final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   String? selectedDate;
@@ -56,69 +57,83 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             padding: const EdgeInsets.only(right: 24, left: 24, top: 37),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  AddingTextField(
-                    width: 500,
-                    height: 55,
-                    title: 'Title',
-                    controller: titleController,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  AddingTextField(
-                    width: 500,
-                    height: 400,
-                    title: 'Description',
-                    controller: descriptionController,
-                    lines: 50,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  MyRowSuffix(
-                    title: 'Deadline (Optional)',
-                    asset: "assets/Icons/calendar.svg",
-                    onDateSelected: updateSelectedDate,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  MyRowSuffix(
-                    title: 'Add Image (Optional)',
-                    asset: "assets/Icons/image.svg",
-                    onImageSelected: updateSelectedImage,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  MyCustomButton(
-                    onPressed: () async {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      try {
-                        await AddTodo().addTodo(
-                            titleController.text,
-                            descriptionController.text,
-                            selectedDate,
-                            selectedImage);
-                        Navigator.pop(context);
-                      } catch (e) {
-                        throw Exception(e);
-                      } finally {
-                        setState(() {
-                          isLoading = false;
-                        });
-                      }
-                    },
-                    title: "ADD TODO",
-                    color: Colors.white,
-                    colorText: primaryColor,
-                    isLoading: isLoading,
-                  ),
-                ],
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    AddingTextField(
+                      title: 'Title',
+                      controller: titleController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Write a Title";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    AddingTextField(
+                      title: 'Description',
+                      controller: descriptionController,
+                      lines: 15,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Write a Description";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MyRowSuffix(
+                      title: 'Deadline (Optional)',
+                      asset: "assets/Icons/calendar.svg",
+                      onDateSelected: updateSelectedDate,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MyRowSuffix(
+                      title: 'Add Image (Optional)',
+                      asset: "assets/Icons/image.svg",
+                      onImageSelected: updateSelectedImage,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    MyCustomButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          try {
+                            await AddTodo().addTodo(
+                                titleController.text,
+                                descriptionController.text,
+                                selectedDate,
+                                selectedImage);
+                            Navigator.pop(context);
+                          } catch (e) {
+                            throw Exception(e);
+                          } finally {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          }
+                        }
+                      },
+                      title: "ADD TODO",
+                      color: Colors.white,
+                      colorText: primaryColor,
+                      isLoading: isLoading,
+                      indicatorColor: primaryColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

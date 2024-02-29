@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do_list/Constants/constats.dart';
 
 class MyCustomButton extends StatelessWidget {
   final String title;
@@ -8,6 +7,7 @@ class MyCustomButton extends StatelessWidget {
   final Color colorText;
   final VoidCallback onPressed;
   final bool isLoading;
+  final Color? indicatorColor;
   const MyCustomButton({
     super.key,
     required this.onPressed,
@@ -15,6 +15,7 @@ class MyCustomButton extends StatelessWidget {
     required this.color,
     required this.colorText,
     required this.isLoading,
+    this.indicatorColor,
   });
 
   @override
@@ -35,7 +36,7 @@ class MyCustomButton extends StatelessWidget {
                   height: 24,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(textColor),
+                    valueColor: AlwaysStoppedAnimation<Color>(indicatorColor!),
                   ),
                 ),
               )

@@ -162,6 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: primaryColor,
                         colorText: textColor,
                         isLoading: isLoading,
+                        indicatorColor: textColor,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

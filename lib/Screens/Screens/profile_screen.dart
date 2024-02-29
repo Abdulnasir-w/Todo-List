@@ -72,6 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: primaryColor,
               colorText: textColor,
               isLoading: isLoading,
+              indicatorColor: textColor,
             ),
           ],
         ),

@@ -6,12 +6,18 @@ import 'package:to_do_list/Utils/row_suffixicon.dart';
 
 import '../../Components/custom_button.dart';
 
-class EditTodoScreen extends StatelessWidget {
+class EditTodoScreen extends StatefulWidget {
   const EditTodoScreen({super.key});
 
   @override
+  State<EditTodoScreen> createState() => _EditTodoScreenState();
+}
+
+class _EditTodoScreenState extends State<EditTodoScreen> {
+  bool isLoading = false;
+  final formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
     return Scaffold(
       backgroundColor: scaffoldbg,
       appBar: const DetailsScreenAppbar(),
@@ -32,19 +38,27 @@ class EditTodoScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const AddingTextField(
-                    width: 500,
-                    height: 55,
+                  AddingTextField(
                     title: 'Title',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Enter a Title";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const AddingTextField(
-                    width: 500,
-                    height: 400,
+                  AddingTextField(
                     title: 'Description',
-                    lines: 50,
+                    lines: 15,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Write a Description";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -69,6 +83,7 @@ class EditTodoScreen extends StatelessWidget {
                     color: Colors.white,
                     colorText: primaryColor,
                     isLoading: isLoading,
+                    indicatorColor: primaryColor,
                   ),
                 ],
               ),

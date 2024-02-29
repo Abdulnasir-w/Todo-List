@@ -94,6 +94,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         color: primaryColor,
                         colorText: textColor,
                         isLoading: isLoading,
+                        indicatorColor: textColor,
                       ),
                     ],
                   ),

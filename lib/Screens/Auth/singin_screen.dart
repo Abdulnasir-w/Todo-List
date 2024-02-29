@@ -141,6 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: primaryColor,
                           colorText: textColor,
                           isLoading: isLoading,
+                          indicatorColor: textColor,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
