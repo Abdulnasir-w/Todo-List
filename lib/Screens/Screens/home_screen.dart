@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Todo%20Models/fetch_data_model.dart';
@@ -88,12 +89,66 @@ class _HomeScreenState extends State<HomeScreen> {
                       return ListView.builder(
                         itemCount: data?.length ?? 0,
                         itemBuilder: ((context, index) {
+                          Timestamp? timestamp =
+                              data![index].get('createdDate') as Timestamp?;
+                          String createdDateText = timestamp != null
+                              ? DateFormat('yyyy-MM-dd')
+                                  .format(timestamp.toDate())
+                              : 'N/A';
+
                           return Container(
                             width: 330,
                             height: 150,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: primaryColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        data[index]["title"],
+                                        style: GoogleFonts.montserrat(
+                                            color: textColor,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Spacer(),
+                                      SvgPicture.asset(
+                                        "assets/Icons/clock white.svg",
+                                        width: 16,
+                                        height: 16,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    data[index]["description"],
+                                    style: GoogleFonts.montserrat(
+                                        color: textColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                  Text(
+                                    "Created on: $createdDateText",
+                                    style: GoogleFonts.montserrat(
+                                        color: textColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }),
