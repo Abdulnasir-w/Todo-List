@@ -112,10 +112,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                           });
                           try {
                             await AddTodo().addTodo(
-                                titleController.text,
-                                descriptionController.text,
-                                selectedDate,
-                                selectedImage);
+                              titleController.text,
+                              descriptionController.text,
+                              selectedDate,
+                              selectedImage,
+                              DateTime.now(),
+                            );
                             Navigator.pop(context);
                           } catch (e) {
                             throw Exception(e);
