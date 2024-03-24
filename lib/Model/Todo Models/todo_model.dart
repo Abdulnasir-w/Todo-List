@@ -1,25 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Todo {
-  String title;
-  String description;
-  DateTime createdDate;
-  String image;
-  String deadline;
+  final String title;
+  final String description;
+  final DateTime createdDate;
+  final String? image;
+  final String? deadline;
   Todo({
     required this.title,
     required this.description,
     required this.createdDate,
-    required this.image,
-    required this.deadline,
+    this.image,
+    this.deadline,
   });
-  factory Todo.fromFireStore(Map<String, dynamic> data) {
-    Timestamp timestamp = data["ceatedDate"] ?? Timestamp.now();
+  factory Todo.fromFireStore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+  ) {
+    final data = snapshot.data() as Map<String, dynamic>;
     return Todo(
-        title: data['title'],
-        description: data['description'],
-        createdDate: timestamp.toDate(),
-        image: data['image'],
-        deadline: data['deadline']);
+      title: data['title'],
+      description: data['description'],
+      createdDate: data['createdDate'],
+      image: data['image'],
+      deadline: data['deadline'],
+    );
+  }
+  Map<String, dynamic> toFireStore() {
+    return {
+      "title": title,
+      "description": description,
+      "createdDate": createdDate,
+      "image": image,
+      "deadline": deadline,
+    };
   }
 }
