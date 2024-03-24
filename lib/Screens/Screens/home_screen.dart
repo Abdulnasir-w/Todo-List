@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
-import 'package:to_do_list/Model/Todo%20Models/fetch_data_model.dart';
-import 'package:to_do_list/Model/Todo%20Models/todo_model.dart';
 import 'package:to_do_list/Screens/Screens/add_todo_screen.dart';
 import 'package:to_do_list/Utils/custom_pop.dart';
 import 'package:to_do_list/Utils/custom_popmenu.dart';
@@ -20,13 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
-  late Future<List<Todo>> todosFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    todosFuture = FetchData().fetchData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,41 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
               ),
               // Data from FireStore
-              FutureBuilder<List<Todo>>(
-                  future: todosFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.deepPurple,
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("Error : ${snapshot.hasError}");
-                    } else {
-                      List<Todo>? todos = snapshot.data;
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: todos!.length,
-                          itemBuilder: (context, index) {
-                            Todo todo = todos[index];
-                            DateTime todoDate = todo.createdDate;
-                            return Container(
-                              width: 330,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: primaryColor,
-                              ),
-                              child: Column(
-                                children: [Text(todo.title)],
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  }),
             ],
           ),
         ),
