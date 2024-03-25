@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Screens/Screens/add_todo_screen.dart';
+import 'package:to_do_list/Utils/custom_list.dart';
 import 'package:to_do_list/Utils/custom_pop.dart';
 import 'package:to_do_list/Utils/custom_popmenu.dart';
 
@@ -60,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
               ),
               // Data from FireStore
+              const ListOfCards(),
             ],
           ),
         ),
