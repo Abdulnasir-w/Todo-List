@@ -33,11 +33,33 @@ class ListOfCards extends StatelessWidget {
                 String formattedDate =
                     DateFormat.yMMMd().add_jm().format(createdDate);
                 return Container(
-                    width: 327,
-                    height: 120,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(12)),
-                    child: Column());
+                  width: 327,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: secondryColor,
+                  ),
+                  child: Card(
+                    margin: EdgeInsets.all(8.0),
+                    child: ListTile(
+                      title: Text(todo['title']),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(todo['description'] ?? ''),
+                          SizedBox(height: 4),
+                          Text('Created on: $formattedDate'),
+                        ],
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          // Implement delete functionality if needed
+                        },
+                      ),
+                    ),
+                  ),
+                );
               },
             );
           }
