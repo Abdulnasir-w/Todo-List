@@ -34,35 +34,37 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: const CustomAppbar(),
         body: Padding(
           padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Custom tab bar,
-              Row(
-                children: [
-                  SvgPicture.asset("assets/Icons/list icon.svg"),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "LIST OF TODO",
-                      style: GoogleFonts.bebasNeue(
-                          fontSize: 36, color: secondryColor),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Custom tab bar,
+                Row(
+                  children: [
+                    SvgPicture.asset("assets/Icons/list icon.svg"),
+                    const SizedBox(
+                      width: 15,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 141,
-                  ),
-                  const CustomPopMenuButton(),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              // Data from FireStore
-              const ListOfCards(),
-            ],
+                    Expanded(
+                      child: Text(
+                        "LIST OF TODO",
+                        style: GoogleFonts.bebasNeue(
+                            fontSize: 36, color: secondryColor),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 141,
+                    ),
+                    const CustomPopMenuButton(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                // Data from FireStore
+                const ListOfCards(),
+              ],
+            ),
           ),
         ),
         floatingActionButton: IconButton(

@@ -38,3 +38,17 @@ TextStyle nameStyle = GoogleFonts.montserrat(
   fontSize: 16,
   fontWeight: FontWeight.w300,
 );
+
+// Home Screen TextColor Title
+TextStyle titleStyle = GoogleFonts.montserrat(
+    color: textColor, fontSize: 16, fontWeight: FontWeight.w400);
+// description
+TextStyle descriptionStyle = GoogleFonts.montserrat(
+  color: textColor,
+  fontSize: 14,
+);
+// createdDate
+TextStyle dateStyle = GoogleFonts.montserrat(
+  color: textColor,
+  fontSize: 11,
+);

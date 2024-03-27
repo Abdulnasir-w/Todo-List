@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_svg/svg.dart";
 import "package:intl/intl.dart";
 import "package:to_do_list/Constants/constats.dart";
 import "package:to_do_list/Model/Todo%20Models/fetch_data_model.dart";
@@ -32,31 +34,38 @@ class ListOfCards extends StatelessWidget {
                 DateTime createdDate = todo['createdDate'].toDate();
                 String formattedDate =
                     DateFormat.yMMMd().add_jm().format(createdDate);
-                return Container(
-                  width: 327,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: secondryColor,
-                  ),
-                  child: Card(
-                    margin: EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(todo['title']),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(todo['description'] ?? ''),
-                          SizedBox(height: 4),
-                          Text('Created on: $formattedDate'),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          // Implement delete functionality if needed
-                        },
-                      ),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Container(
+                    width: 327,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: primaryColor,
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 20, top: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                todo['title'],
+                                style: titleStyle,
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(
+                                  "assets/Icons/clock white.svg",
+                                  width: 16,
+                                  height: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 );
