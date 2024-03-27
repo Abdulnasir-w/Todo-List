@@ -44,9 +44,11 @@ class ListOfCards extends StatelessWidget {
                       color: primaryColor,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 20, top: 4),
+                          padding: const EdgeInsets.only(left: 20, top: 4),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -64,7 +66,27 @@ class ListOfCards extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                          ),
+                          child: Flexible(
+                            child: Text(
+                              todo['description'],
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: descriptionStyle,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 20, top: 20),
+                          child: Text(
+                            "Created at $formattedDate",
+                            style: dateStyle,
+                          ),
+                        ),
                       ],
                     ),
                   ),
