@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_svg/svg.dart";
 import "package:intl/intl.dart";
 import "package:to_do_list/Constants/constats.dart";
@@ -34,6 +33,8 @@ class ListOfCards extends StatelessWidget {
                 DateTime createdDate = todo['createdDate'].toDate();
                 String formattedDate =
                     DateFormat.yMMMd().add_jm().format(createdDate);
+                Color containerColor =
+                    index.isEven ? secondryColor : primaryColor;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Container(
@@ -41,7 +42,7 @@ class ListOfCards extends StatelessWidget {
                     height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: primaryColor,
+                      color: containerColor,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -68,20 +69,21 @@ class ListOfCards extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20.0,
-                          ),
+                          padding: const EdgeInsets.only(left: 20.0, right: 10),
                           child: Flexible(
                             child: Text(
                               todo['description'],
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: descriptionStyle,
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 20, top: 20),
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 20,
+                          ),
                           child: Text(
                             "Created at $formattedDate",
                             style: dateStyle,
