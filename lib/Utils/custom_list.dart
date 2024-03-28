@@ -37,40 +37,57 @@ class ListOfCards extends StatelessWidget {
                     index.isEven ? secondryColor : primaryColor;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Container(
-                    width: 327,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: containerColor,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 4),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                todo['title'],
-                                style: titleStyle,
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: SvgPicture.asset(
-                                  "assets/Icons/clock white.svg",
-                                  width: 16,
-                                  height: 16,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Container(
+                      width: 327,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: containerColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 4),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  todo['title'],
+                                  style: titleStyle,
                                 ),
-                              ),
-                            ],
+                                IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Deadline"),
+                                            content: todo['deadline'] != null
+                                                ? Text(
+                                                    todo['deadline'],
+                                                    style: titleStyle,
+                                                  )
+                                                : const Text(
+                                                    "No Deadline Specified"),
+                                          );
+                                        });
+                                  },
+                                  icon: SvgPicture.asset(
+                                    "assets/Icons/clock white.svg",
+                                    width: 16,
+                                    height: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 10),
-                          child: Flexible(
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 10),
                             child: Text(
                               todo['description'],
                               maxLines: 1,
@@ -78,18 +95,18 @@ class ListOfCards extends StatelessWidget {
                               style: descriptionStyle,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            top: 20,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                              top: 20,
+                            ),
+                            child: Text(
+                              "Created at $formattedDate",
+                              style: dateStyle,
+                            ),
                           ),
-                          child: Text(
-                            "Created at $formattedDate",
-                            style: dateStyle,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
