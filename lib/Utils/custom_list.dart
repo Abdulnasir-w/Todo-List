@@ -59,29 +59,47 @@ class ListOfCards extends StatelessWidget {
                                   todo['title'],
                                   style: titleStyle,
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    showDialog(
+                                Builder(builder: (context) {
+                                  return IconButton(
+                                    onPressed: () async {
+                                      final RenderBox button = context
+                                          .findRenderObject() as RenderBox;
+                                      final Offset position =
+                                          button.localToGlobal(
+                                        Offset.zero,
+                                      );
+                                      await showMenu(
+                                        color: secondryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
                                         context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text("Deadline"),
-                                            content: todo['deadline'] != null
-                                                ? Text(
-                                                    todo['deadline'],
-                                                    style: titleStyle,
-                                                  )
-                                                : const Text(
-                                                    "No Deadline Specified"),
-                                          );
-                                        });
-                                  },
-                                  icon: SvgPicture.asset(
-                                    "assets/Icons/clock white.svg",
-                                    width: 16,
-                                    height: 16,
-                                  ),
-                                ),
+                                        position: RelativeRect.fromLTRB(
+                                            position.dx,
+                                            position.dy,
+                                            position.dx,
+                                            position.dy),
+                                        items: [
+                                          PopupMenuItem(
+                                            height: 15,
+                                            labelTextStyle:
+                                                MaterialStateProperty.all(
+                                                    titleStyle),
+                                            child: Text(
+                                              todo['deadline'],
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                    icon: SvgPicture.asset(
+                                      "assets/Icons/clock white.svg",
+                                      width: 16,
+                                      height: 16,
+                                    ),
+                                  );
+                                }),
                               ],
                             ),
                           ),
