@@ -86,9 +86,11 @@ class ListOfCards extends StatelessWidget {
                                             labelTextStyle:
                                                 MaterialStateProperty.all(
                                                     titleStyle),
-                                            child: Text(
-                                              todo['deadline'],
-                                            ),
+                                            child: todo['deadline'] != null
+                                                ? Text(
+                                                    todo['deadline'],
+                                                  )
+                                                : const Text('No Deadline'),
                                           ),
                                         ],
                                       );
