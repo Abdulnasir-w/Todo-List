@@ -12,6 +12,10 @@ class Deadline {
       ancestor: overlay,
     );
     await showMenu(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      color: primaryColor,
       context: context,
       position: RelativeRect.fromLTRB(
         position.dx,
