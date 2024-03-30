@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:intl/intl.dart";
+import "package:to_do_list/Components/custom_deadline.dart";
 import "package:to_do_list/Constants/constats.dart";
 import "package:to_do_list/Model/Todo%20Models/fetch_data_model.dart";
 
@@ -62,7 +63,9 @@ class ListOfCards extends StatelessWidget {
                                 Builder(
                                   builder: (context) {
                                     return IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Deadline.showMenuFun(context, todo);
+                                      },
                                       icon: SvgPicture.asset(
                                         "assets/Icons/clock white.svg",
                                         width: 16,
