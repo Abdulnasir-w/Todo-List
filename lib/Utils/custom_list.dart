@@ -59,49 +59,18 @@ class ListOfCards extends StatelessWidget {
                                   todo['title'],
                                   style: titleStyle,
                                 ),
-                                Builder(builder: (context) {
-                                  return IconButton(
-                                    onPressed: () async {
-                                      final RenderBox button = context
-                                          .findRenderObject() as RenderBox;
-                                      final Offset position =
-                                          button.localToGlobal(
-                                        Offset.zero,
-                                      );
-                                      await showMenu(
-                                        color: secondryColor,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        context: context,
-                                        position: RelativeRect.fromLTRB(
-                                            position.dx,
-                                            position.dy,
-                                            position.dx,
-                                            position.dy),
-                                        items: [
-                                          PopupMenuItem(
-                                            height: 15,
-                                            labelTextStyle:
-                                                MaterialStateProperty.all(
-                                                    titleStyle),
-                                            child: todo['deadline'] != null
-                                                ? Text(
-                                                    todo['deadline'],
-                                                  )
-                                                : const Text('No Deadline'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                    icon: SvgPicture.asset(
-                                      "assets/Icons/clock white.svg",
-                                      width: 16,
-                                      height: 16,
-                                    ),
-                                  );
-                                }),
+                                Builder(
+                                  builder: (context) {
+                                    return IconButton(
+                                      onPressed: () {},
+                                      icon: SvgPicture.asset(
+                                        "assets/Icons/clock white.svg",
+                                        width: 16,
+                                        height: 16,
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
