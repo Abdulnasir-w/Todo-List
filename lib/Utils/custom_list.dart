@@ -34,8 +34,8 @@ class ListOfCards extends StatelessWidget {
                 DateTime createdDate = todo['createdDate'].toDate();
                 String formattedDate =
                     DateFormat.yMMMd().add_jm().format(createdDate);
-                Color containerColor =
-                    index.isEven ? secondryColor : primaryColor;
+                // Color containerColor =
+                //     index.isEven ? secondryColor : primaryColor;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: InkWell(
@@ -45,7 +45,7 @@ class ListOfCards extends StatelessWidget {
                       height: 120,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: containerColor,
+                        color: primaryColor,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,

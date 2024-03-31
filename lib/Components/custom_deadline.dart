@@ -15,7 +15,8 @@ class Deadline {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: primaryColor,
+      color: secondryColor,
+      useRootNavigator: true,
       context: context,
       position: RelativeRect.fromLTRB(
         position.dx,
@@ -25,7 +26,7 @@ class Deadline {
       ),
       items: [
         PopupMenuItem(
-          height: 17,
+          height: 7,
           labelTextStyle: MaterialStateProperty.all(titleStyle),
           child: todo['deadline'] != null
               ? Text(
@@ -34,6 +35,10 @@ class Deadline {
               : const Text('No Deadline'),
         ),
       ],
+      popUpAnimationStyle: AnimationStyle(
+        curve: Curves.ease,
+        //reverseCurve: Curves.easeInBack,
+      ),
     );
   }
 }
