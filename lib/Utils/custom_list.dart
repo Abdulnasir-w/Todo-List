@@ -4,6 +4,7 @@ import "package:intl/intl.dart";
 import "package:to_do_list/Components/custom_deadline.dart";
 import "package:to_do_list/Constants/constats.dart";
 import "package:to_do_list/Model/Todo%20Models/fetch_data_model.dart";
+import "package:to_do_list/Screens/Screens/detail_todo_screen.dart";
 
 class ListOfCards extends StatelessWidget {
   const ListOfCards({super.key});
@@ -39,7 +40,12 @@ class ListOfCards extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DetailsToDoScreen()));
+                    },
                     child: Container(
                       width: 327,
                       height: 120,
@@ -64,7 +70,7 @@ class ListOfCards extends StatelessWidget {
                                   builder: (context) {
                                     return IconButton(
                                       onPressed: () {
-                                        Deadline.showMenuFun(context, todo);
+                                        Deadline.showMenuFun(context);
                                       },
                                       icon: SvgPicture.asset(
                                         "assets/Icons/clock white.svg",

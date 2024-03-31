@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import 'package:to_do_list/Model/Todo%20Models/fetch_data_model.dart';
 
 class Deadline {
-  static Future<void> showMenuFun(
-      BuildContext context, Map<String, dynamic> todo) async {
+  static Future<void> showMenuFun(BuildContext context) async {
+    String deadline = await fetchDeadline(context);
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -28,9 +31,9 @@ class Deadline {
         PopupMenuItem(
           height: 7,
           labelTextStyle: MaterialStateProperty.all(titleStyle),
-          child: todo['deadline'] != null
+          child: deadline.isNotEmpty
               ? Text(
-                  todo['deadline'],
+                  deadline,
                 )
               : const Text('No Deadline'),
         ),
@@ -40,5 +43,18 @@ class Deadline {
         //reverseCurve: Curves.easeInBack,
       ),
     );
+  }
+
+  static Future<String> fetchDeadline(BuildContext context) async {
+    String deadline = '';
+    FetchData fetchData = FetchData();
+    List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
+    for (Map<String, dynamic> todo in userTodos) {
+      if (todo.containsKey('deadline')) {
+        deadline = todo['deadline'];
+        break;
+      }
+    }
+    return deadline;
   }
 }
