@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_list/Components/custom_deadline.dart';
 import 'package:to_do_list/Screens/Screens/delete_todo_screen.dart';
 import 'package:to_do_list/Screens/Screens/edit_todo_screen.dart';
 
@@ -40,7 +40,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
             children: [
               InkWell(
                 onTap: () {
-                  Fluttertoast.showToast(msg: "Date");
+                  Deadline.showMenuFun(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/clock.svg",
