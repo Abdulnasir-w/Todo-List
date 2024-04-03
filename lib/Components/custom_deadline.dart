@@ -31,11 +31,7 @@ class Deadline {
         PopupMenuItem(
           height: 7,
           labelTextStyle: MaterialStateProperty.all(titleStyle),
-          child: deadline.isNotEmpty
-              ? Text(
-                  deadline,
-                )
-              : const Text('No Deadline'),
+          child: Text(deadline),
         ),
       ],
       popUpAnimationStyle: AnimationStyle(
@@ -46,15 +42,19 @@ class Deadline {
   }
 
   static Future<String> fetchDeadline(BuildContext context) async {
-    String deadline = '';
-    FetchData fetchData = FetchData();
-    List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
-    for (Map<String, dynamic> todo in userTodos) {
-      if (todo.containsKey('deadline')) {
-        deadline = todo['deadline'];
-        break;
+    try {
+      FetchData fetchData = FetchData();
+      List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
+
+      if (userTodos.isNotEmpty && userTodos[0]['deadline'] != null) {
+        return userTodos[0]['deadline'];
+      } else {
+        return 'No deadline';
       }
+    } catch (e) {
+      // Handle or log the error as appropriate for your application
+      print('Error fetching deadline: $e');
+      return 'Error fetching deadline';
     }
-    return deadline;
   }
 }

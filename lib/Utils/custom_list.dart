@@ -35,7 +35,7 @@ class ListOfCards extends StatelessWidget {
                 DateTime createdDate = todo['createdDate'].toDate();
                 String formattedDate =
                     DateFormat.yMMMd().add_jm().format(createdDate);
-                // Color containerColor =
+                // Color containerColor =kk
                 //     index.isEven ? secondryColor : primaryColor;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
