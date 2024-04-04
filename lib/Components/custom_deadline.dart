@@ -53,7 +53,7 @@ class Deadline {
       }
     } catch (e) {
       // Handle or log the error as appropriate for your application
-      print('Error fetching deadline: $e');
+      //print('Error fetching deadline: $e');
       return 'Error fetching deadline';
     }
   }
