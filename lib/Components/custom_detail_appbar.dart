@@ -40,7 +40,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
             children: [
               InkWell(
                 onTap: () {
-                  Deadline.showMenuFun(context);
+                  // Deadline.showMenuFun(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/clock.svg",

@@ -70,7 +70,8 @@ class ListOfCards extends StatelessWidget {
                                   builder: (context) {
                                     return IconButton(
                                       onPressed: () {
-                                        Deadline.showMenuFun(context);
+                                        int taskId = todo["id"];
+                                        Deadline.showMenuFun(context, taskId);
                                       },
                                       icon: SvgPicture.asset(
                                         "assets/Icons/clock white.svg",

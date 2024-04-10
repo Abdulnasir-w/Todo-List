@@ -5,8 +5,8 @@ import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Todo%20Models/fetch_data_model.dart';
 
 class Deadline {
-  static Future<void> showMenuFun(BuildContext context) async {
-    String deadline = await fetchDeadline(context);
+  static Future<void> showMenuFun(BuildContext context, int taskId) async {
+    String? deadline = await FetchData().deadline(taskId.toString());
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -31,7 +31,7 @@ class Deadline {
         PopupMenuItem(
           height: 7,
           labelTextStyle: MaterialStateProperty.all(titleStyle),
-          child: Text(deadline),
+          child: Text(deadline ?? "No Deadline"),
         ),
       ],
       popUpAnimationStyle: AnimationStyle(
@@ -41,20 +41,21 @@ class Deadline {
     );
   }
 
-  static Future<String> fetchDeadline(BuildContext context) async {
-    try {
-      FetchData fetchData = FetchData();
-      List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
+  // static Future<String> fetchDeadline(BuildContext context) async {
+  //   try {
+  //     FetchData fetchData = FetchData();
+  //     List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
+  //     print('Fetched todos: ${userTodos[3]['deadline']}');
 
-      if (userTodos.isNotEmpty && userTodos[0]['deadline'] != null) {
-        return userTodos[0]['deadline'];
-      } else {
-        return 'No deadline';
-      }
-    } catch (e) {
-      // Handle or log the error as appropriate for your application
-      //print('Error fetching deadline: $e');
-      return 'Error fetching deadline';
-    }
-  }
+  //     if (userTodos.isNotEmpty && userTodos[0]['deadline'] != null) {
+  //       return userTodos[0]['deadline'];
+  //     } else {
+  //       return 'No deadline';
+  //     }
+  //   } catch (e) {
+  //     // Handle or log the error as appropriate for your application
+  //     print('Error fetching deadline: $e');
+  //     return 'Error fetching deadline';
+  //   }
+  // }
 }
