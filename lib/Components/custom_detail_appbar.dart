@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:to_do_list/Components/custom_deadline.dart';
 import 'package:to_do_list/Screens/Screens/delete_todo_screen.dart';
 import 'package:to_do_list/Screens/Screens/edit_todo_screen.dart';
 
+import 'custom_deadline.dart';
+
 class DetailsScreenAppbar extends StatefulWidget
     implements PreferredSizeWidget {
-  const DetailsScreenAppbar({super.key});
+  final int taskId;
+  const DetailsScreenAppbar({super.key, required this.taskId});
 
   @override
   State<DetailsScreenAppbar> createState() => _DetailsScreenAppbarState();
@@ -40,7 +42,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
             children: [
               InkWell(
                 onTap: () {
-                  // Deadline.showMenuFun(context);
+                  Deadline.showMenuFun(context, widget.taskId);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/clock.svg",
@@ -56,7 +58,9 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const EditTodoScreen()),
+                        builder: (context) => EditTodoScreen(
+                              taskId: widget.taskId,
+                            )),
                   );
                 },
                 child: SvgPicture.asset(

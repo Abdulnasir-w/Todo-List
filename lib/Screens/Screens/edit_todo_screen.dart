@@ -7,7 +7,8 @@ import 'package:to_do_list/Utils/row_suffixicon.dart';
 import '../../Components/custom_button.dart';
 
 class EditTodoScreen extends StatefulWidget {
-  const EditTodoScreen({super.key});
+  final int taskId;
+  const EditTodoScreen({super.key, required this.taskId});
 
   @override
   State<EditTodoScreen> createState() => _EditTodoScreenState();
@@ -20,7 +21,9 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldbg,
-      appBar: const DetailsScreenAppbar(),
+      appBar: DetailsScreenAppbar(
+        taskId: widget.taskId,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: Container(

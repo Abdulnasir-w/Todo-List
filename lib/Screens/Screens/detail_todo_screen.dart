@@ -3,13 +3,16 @@ import 'package:to_do_list/Components/custom_detail_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
 
 class DetailsToDoScreen extends StatelessWidget {
-  const DetailsToDoScreen({super.key});
+  final int taskId;
+  const DetailsToDoScreen({super.key, required this.taskId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldbg,
-      appBar: const DetailsScreenAppbar(),
+      appBar: DetailsScreenAppbar(
+        taskId: taskId,
+      ),
     );
   }
 }

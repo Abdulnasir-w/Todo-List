@@ -40,22 +40,4 @@ class Deadline {
       ),
     );
   }
-
-  // static Future<String> fetchDeadline(BuildContext context) async {
-  //   try {
-  //     FetchData fetchData = FetchData();
-  //     List<Map<String, dynamic>> userTodos = await fetchData.getUserTodos();
-  //     print('Fetched todos: ${userTodos[3]['deadline']}');
-
-  //     if (userTodos.isNotEmpty && userTodos[0]['deadline'] != null) {
-  //       return userTodos[0]['deadline'];
-  //     } else {
-  //       return 'No deadline';
-  //     }
-  //   } catch (e) {
-  //     // Handle or log the error as appropriate for your application
-  //     print('Error fetching deadline: $e');
-  //     return 'Error fetching deadline';
-  //   }
-  // }
 }

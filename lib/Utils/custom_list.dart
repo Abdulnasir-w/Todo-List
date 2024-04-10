@@ -41,10 +41,13 @@ class ListOfCards extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: InkWell(
                     onTap: () {
+                      int taskId = todo["id"];
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DetailsToDoScreen()));
+                              builder: (context) => DetailsToDoScreen(
+                                    taskId: taskId,
+                                  )));
                     },
                     child: Container(
                       width: 327,
