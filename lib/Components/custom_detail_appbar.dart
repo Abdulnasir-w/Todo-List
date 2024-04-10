@@ -51,7 +51,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
                 ),
               ),
               const SizedBox(
-                width: 8,
+                width: 10,
               ),
               InkWell(
                 onTap: () {
@@ -70,7 +70,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
                 ),
               ),
               const SizedBox(
-                width: 8,
+                width: 10,
               ),
               InkWell(
                 onTap: () {

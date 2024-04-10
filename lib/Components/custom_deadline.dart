@@ -19,7 +19,7 @@ class Deadline {
         borderRadius: BorderRadius.circular(12),
       ),
       color: secondryColor,
-      useRootNavigator: true,
+      useRootNavigator: false,
       context: context,
       position: RelativeRect.fromLTRB(
         position.dx,
