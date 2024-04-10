@@ -84,6 +84,7 @@ flutter:
     - assets/Icons/edit.svg
     - assets/Icons/clock.svg
     - assets/Icons/trash.svg
+    - assets/Icons/back.svg
     - assets/Icons/clock white.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -22,12 +22,13 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 20),
+      leading: Container(
+        width: 24,
+        height: 24,
         child: SvgPicture.asset(
-          "assets/Logo/banner.svg",
-          width: 84,
-          height: 19,
+          "assets/Icons/back.svg",
+          width: 24,
+          height: 24,
         ),
       ),
       leadingWidth: 160,

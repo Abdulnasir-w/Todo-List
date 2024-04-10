@@ -4,7 +4,9 @@ import 'package:to_do_list/Constants/constats.dart';
 
 class DetailsToDoScreen extends StatelessWidget {
   final int taskId;
-  const DetailsToDoScreen({super.key, required this.taskId});
+  final Map<String, dynamic> todo;
+  const DetailsToDoScreen(
+      {super.key, required this.taskId, required this.todo});
 
   @override
   Widget build(BuildContext context) {

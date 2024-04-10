@@ -47,6 +47,7 @@ class ListOfCards extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => DetailsToDoScreen(
                                     taskId: taskId,
+                                    todo: todo,
                                   )));
                     },
                     child: Container(
