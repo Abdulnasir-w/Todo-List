@@ -52,3 +52,9 @@ TextStyle dateStyle = GoogleFonts.montserrat(
   color: textColor,
   fontSize: 11,
 );
+//--------------------------------------------------------------------
+// Detail Screen Styles
+TextStyle detaliTitleStyle = GoogleFonts.bebasNeue(
+  fontSize: 26,
+  color: const Color(0xff272727),
+);
