@@ -15,6 +15,12 @@ class DetailsToDoScreen extends StatelessWidget {
       appBar: DetailsScreenAppbar(
         taskId: taskId,
       ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          children: [],
+        ),
+      ),
     );
   }
 }
