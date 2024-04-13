@@ -91,12 +91,14 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
   Future<void> _imagePicker() async {
     final picker = ImagePicker();
     XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    String uniqueName = DateTime.now().toString();
 
     if (pickedFile != null) {
       Reference reference = FirebaseStorage.instance.ref();
       Reference referenceDirImage = reference.child('Images');
-      Reference referenceImageToUpload = referenceDirImage.child('name');
+      Reference referenceImageToUpload = referenceDirImage.child(uniqueName);
       await referenceImageToUpload.putFile(File(pickedFile.path));
+
       Fluttertoast.showToast(msg: "Image is Picked");
       String fileName = pickedFile.path.split("/").last;
       int maxLength = 10; // Specify the maximum length you want
