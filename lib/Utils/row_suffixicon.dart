@@ -32,6 +32,7 @@ class MyRowSuffix extends StatefulWidget {
 class _MyRowSuffixState extends State<MyRowSuffix> {
   String? dateSelect = "";
   String imageName = "";
+  bool _isUploading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,17 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
                     _showCalendarPopup(context);
                   }
                 },
-                child: SvgPicture.asset(widget.asset)),
+                child: _isUploading
+                    ? SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.0,
+                          strokeCap: StrokeCap.round,
+                          valueColor: AlwaysStoppedAnimation<Color>(textColor),
+                        ),
+                      ) // Show CircularProgressIndicator when uploading
+                    : SvgPicture.asset(widget.asset)),
           ],
         ),
       ),
@@ -94,6 +105,11 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
     String uniqueName = DateTime.now().toString();
 
     if (pickedFile != null) {
+      /// File Uploding to FireBase Storage
+
+      setState(() {
+        _isUploading = true;
+      });
       Reference reference = FirebaseStorage.instance.ref();
       Reference referenceDirImage = reference.child('Images');
       Reference referenceImageToUpload = referenceDirImage.child(uniqueName);
@@ -108,6 +124,7 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
       setState(() {
         imageName = fileName;
         widget.onImageSelected!(pickedFile.path);
+        _isUploading = false;
       });
     }
   }
