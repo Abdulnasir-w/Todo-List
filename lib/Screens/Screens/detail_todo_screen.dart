@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/custom_detail_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import 'package:to_do_list/Model/Todo%20Models/upload_image.dart';
 
 class DetailsToDoScreen extends StatelessWidget {
   final int taskId;
   final Map<String, dynamic> todo;
-  const DetailsToDoScreen(
-      {super.key, required this.taskId, required this.todo});
+  const DetailsToDoScreen({
+    super.key,
+    required this.taskId,
+    required this.todo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,25 @@ class DetailsToDoScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              if (todo['image'] != null)
+                FutureBuilder<String>(
+                  future: getImageFromFirebase(todo['image']),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("Error ${snapshot.hasError}");
+                    } else if (snapshot.hasData) {
+                      return Image.network(snapshot.data!);
+                    } else {
+                      return const Text("Image is Not available");
+                    }
+                  },
+                )
+              else
+                const Text("Image is Not Uploaded")
             ],
           ),
         ),
