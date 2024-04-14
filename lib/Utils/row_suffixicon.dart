@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:to_do_list/Components/custom_imagepicker.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:image_picker/image_picker.dart';
 import 'dart:core';
 
 class MyRowSuffix extends StatefulWidget {
@@ -29,7 +29,6 @@ class MyRowSuffix extends StatefulWidget {
 class _MyRowSuffixState extends State<MyRowSuffix> {
   String? dateSelect = "";
   String imageName = "";
-  bool _isUploading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +62,7 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
                     _showCalendarPopup(context);
                   }
                 },
-                child: _isUploading
-                    ? SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.0,
-                          strokeCap: StrokeCap.round,
-                          valueColor: AlwaysStoppedAnimation<Color>(textColor),
-                        ),
-                      ) // Show CircularProgressIndicator when uploading
-                    : SvgPicture.asset(widget.asset)),
+                child: SvgPicture.asset(widget.asset)),
           ],
         ),
       ),
@@ -96,22 +85,22 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
   }
 
   // Method for image picker
-  void _imagePicker() async {
-    setState(() {
-      _isUploading = true;
-    });
-    imagePicker((String imagePath) {
+  Future<void> _imagePicker() async {
+    final picker = ImagePicker();
+    XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      /// File Uploding to FireBase Storage
       Fluttertoast.showToast(msg: "Image is Picked");
-      String fileName = imagePath.split("/").last;
+      String fileName = pickedFile.path.split("/").last;
       int maxLength = 10; // Specify the maximum length you want
       fileName = fileName.length > maxLength
           ? "${fileName.substring(0, maxLength)}..."
           : fileName;
       setState(() {
         imageName = fileName;
-        widget.onImageSelected!(imagePath);
-        _isUploading = false;
+        widget.onImageSelected!(pickedFile.path);
       });
-    });
+    }
   }
 }

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Components/custom_button.dart';
-import 'package:to_do_list/Components/custom_imagepicker.dart';
 import 'package:to_do_list/Constants/constats.dart';
+import 'package:to_do_list/Model/Todo%20Models/upload_image.dart';
 import '../../Model/Todo Models/add_model.dart';
 import '../../Utils/row_suffixicon.dart';
 
@@ -112,9 +112,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                             isLoading = true;
                           });
                           try {
-                            String? imagePath;
                             if (selectedImage != null) {
-                              imagePath = await imagePicker((p0) => null);
+                              await uploadToFirebaseStorage(selectedImage!);
                             }
                             await AddTodo().addTodo(
                               titleController.text,
