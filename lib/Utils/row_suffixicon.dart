@@ -1,14 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api, unnecessary_this, depend_on_referenced_packages
 
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_list/Components/custom_imagepicker.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:image_picker/image_picker.dart';
 import 'dart:core';
 
 class MyRowSuffix extends StatefulWidget {
@@ -99,33 +96,22 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
   }
 
   // Method for image picker
-  Future<void> _imagePicker() async {
-    final picker = ImagePicker();
-    XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    String uniqueName = DateTime.now().toString();
-
-    if (pickedFile != null) {
-      /// File Uploding to FireBase Storage
-
-      setState(() {
-        _isUploading = true;
-      });
-      Reference reference = FirebaseStorage.instance.ref();
-      Reference referenceDirImage = reference.child('Images');
-      Reference referenceImageToUpload = referenceDirImage.child(uniqueName);
-      await referenceImageToUpload.putFile(File(pickedFile.path));
-
+  void _imagePicker() async {
+    setState(() {
+      _isUploading = true;
+    });
+    imagePicker((String imagePath) {
       Fluttertoast.showToast(msg: "Image is Picked");
-      String fileName = pickedFile.path.split("/").last;
+      String fileName = imagePath.split("/").last;
       int maxLength = 10; // Specify the maximum length you want
       fileName = fileName.length > maxLength
           ? "${fileName.substring(0, maxLength)}..."
           : fileName;
       setState(() {
         imageName = fileName;
-        widget.onImageSelected!(pickedFile.path);
+        widget.onImageSelected!(imagePath);
         _isUploading = false;
       });
-    }
+    });
   }
 }
