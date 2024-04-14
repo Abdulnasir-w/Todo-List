@@ -53,6 +53,7 @@ class DetailsToDoScreen extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
                       );
                     } else if (snapshot.hasError) {
+                      print("Error ${snapshot.hasError}");
                       return Text("Error ${snapshot.hasError}");
                     } else if (snapshot.hasData) {
                       return Image.network(snapshot.data!);
