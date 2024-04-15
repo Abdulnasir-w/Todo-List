@@ -8,7 +8,7 @@ import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/sign_up_model.dart';
 import 'package:to_do_list/Screens/Auth/singin_screen.dart';
-import 'package:to_do_list/Utils/name_email_changepassword.dart';
+import 'package:to_do_list/Utils/name_email_change_password.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

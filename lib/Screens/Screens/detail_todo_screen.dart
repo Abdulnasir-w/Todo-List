@@ -49,8 +49,11 @@ class DetailsToDoScreen extends StatelessWidget {
                   future: getImageFromFirebase(todo['image']),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black),
+                        ),
                       );
                     } else if (snapshot.hasError) {
                       print("Error ${snapshot.hasError}");
