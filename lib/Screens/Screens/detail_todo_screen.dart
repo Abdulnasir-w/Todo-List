@@ -66,7 +66,12 @@ class DetailsToDoScreen extends StatelessWidget {
                   },
                 )
               else
-                const Text("Image is Not Uploaded")
+                Center(
+                  child: Text(
+                    "Image is Not Uploaded",
+                    style: detaliTitleStyle,
+                  ),
+                )
             ],
           ),
         ),

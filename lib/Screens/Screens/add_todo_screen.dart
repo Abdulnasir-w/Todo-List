@@ -127,7 +127,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                               titleController.text,
                               descriptionController.text,
                               selectedDate,
-                              selectedImage,
+                              getImageName,
                               DateTime.now(),
                             );
                             Navigator.pop(context);
