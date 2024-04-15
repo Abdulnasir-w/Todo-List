@@ -23,6 +23,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   TextEditingController descriptionController = TextEditingController();
   String? selectedDate;
   String? selectedImage;
+  String? imageName;
 
   // for date
   void updateSelectedDate(String date) {
@@ -101,6 +102,11 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                       title: 'Add Image (Optional)',
                       asset: "assets/Icons/image.svg",
                       onImageSelected: updateSelectedImage,
+                      imageName: (name) {
+                        setState(() {
+                          imageName = name;
+                        });
+                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -112,8 +118,10 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                             isLoading = true;
                           });
                           try {
+                            String getImageName = imageName ?? "";
                             if (selectedImage != null) {
-                              await uploadToFirebaseStorage(selectedImage!);
+                              await uploadToFirebaseStorage(
+                                  selectedImage!, getImageName);
                             }
                             await AddTodo().addTodo(
                               titleController.text,

@@ -13,6 +13,7 @@ class MyRowSuffix extends StatefulWidget {
   final String asset;
   final Function(String)? onImageSelected;
   final Function(String)? onDateSelected;
+  final Function(String)? imageName;
 
   const MyRowSuffix({
     super.key,
@@ -20,6 +21,7 @@ class MyRowSuffix extends StatefulWidget {
     required this.asset,
     this.onDateSelected,
     this.onImageSelected,
+    this.imageName,
   });
 
   @override
@@ -90,16 +92,16 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
     XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      /// File Uploding to FireBase Storage
       Fluttertoast.showToast(msg: "Image is Picked");
       String fileName = pickedFile.path.split("/").last;
-      int maxLength = 10; // Specify the maximum length you want
+      int maxLength = 15; // Specify the maximum length you want
       fileName = fileName.length > maxLength
           ? "${fileName.substring(0, maxLength)}..."
           : fileName;
       setState(() {
         imageName = fileName;
         widget.onImageSelected!(pickedFile.path);
+        widget.imageName!(imageName);
       });
     }
   }
