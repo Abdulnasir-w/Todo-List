@@ -48,13 +48,14 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditTodoScreen(
-                              taskId: widget.taskId,
-                            )),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => EditTodoScreen(
+                  //             taskId: widget.taskId,
+                  //           )),
+                  // );
+                  EditBottomSheet().showBottomSheet(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/edit.svg",

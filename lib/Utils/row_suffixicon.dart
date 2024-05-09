@@ -93,8 +93,8 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
 
     if (pickedFile != null) {
       Fluttertoast.showToast(msg: "Image is Picked");
-      String fileName = pickedFile.path.split("/").last;
-      int maxLength = 15; // Specify the maximum length you want
+      String fileName = pickedFile.name;
+      int maxLength = 20; // Specify the maximum length you want
       fileName = fileName.length > maxLength
           ? "${fileName.substring(0, maxLength)}..."
           : fileName;
