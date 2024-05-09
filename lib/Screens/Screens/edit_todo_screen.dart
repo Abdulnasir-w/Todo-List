@@ -3,13 +3,26 @@ import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Utils/row_suffixicon.dart';
 
-class EditBottomSheet {
+class EditTodoScreen extends StatefulWidget {
+  const EditTodoScreen({super.key});
+
+  @override
+  State<EditTodoScreen> createState() => _EditTodoScreenState();
+}
+
+class _EditTodoScreenState extends State<EditTodoScreen> {
   bool isLoading = false;
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: showBottomSheet(context),
+    );
+  }
 
-  void showBottomSheet(BuildContext context) {
+  showBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         enableDrag: true,

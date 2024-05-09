@@ -48,14 +48,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => EditTodoScreen(
-                  //             taskId: widget.taskId,
-                  //           )),
-                  // );
-                  EditBottomSheet().showBottomSheet(context);
+                  const EditTodoScreen();
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/edit.svg",
@@ -68,11 +61,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DeleteTodoScreen()),
-                  );
+                  const DeleteTodoScreen();
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/trash.svg",
