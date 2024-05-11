@@ -18,11 +18,11 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: showBottomSheet(context),
+      body: Container(),
     );
   }
 
-  showBottomSheet(BuildContext context) {
+  editBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         enableDrag: true,

@@ -5,19 +5,11 @@ import 'package:to_do_list/Screens/Screens/edit_todo_screen.dart';
 
 import 'custom_deadline.dart';
 
-class DetailsScreenAppbar extends StatefulWidget
+class DetailsScreenAppbar extends StatelessWidget
     implements PreferredSizeWidget {
   final int taskId;
   const DetailsScreenAppbar({super.key, required this.taskId});
 
-  @override
-  State<DetailsScreenAppbar> createState() => _DetailsScreenAppbarState();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,7 +26,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
             children: [
               InkWell(
                 onTap: () {
-                  Deadline.showMenuFun(context, widget.taskId);
+                  Deadline.showMenuFun(context, taskId);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/clock.svg",
@@ -48,7 +40,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
               ),
               InkWell(
                 onTap: () {
-                  const EditTodoScreen();
+                  // EditTodoScreen().editBottomSheet(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/edit.svg",
@@ -61,7 +53,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
               ),
               InkWell(
                 onTap: () {
-                  const DeleteTodoScreen();
+                  const DeleteTodoScreen().deleteBottomSheet(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/trash.svg",
@@ -75,4 +67,7 @@ class _DetailsScreenAppbarState extends State<DetailsScreenAppbar> {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

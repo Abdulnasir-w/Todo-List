@@ -6,7 +6,7 @@ class MyCustomButton extends StatelessWidget {
   final Color color;
   final Color colorText;
   final VoidCallback onPressed;
-  final bool? isLoading;
+  final bool isLoading;
   final Color? indicatorColor;
   const MyCustomButton({
     super.key,
@@ -14,7 +14,7 @@ class MyCustomButton extends StatelessWidget {
     required this.title,
     required this.color,
     required this.colorText,
-    this.isLoading,
+    required this.isLoading,
     this.indicatorColor,
   });
 
@@ -28,8 +28,8 @@ class MyCustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextButton(
-        onPressed: isLoading! ? null : onPressed,
-        child: isLoading!
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
             ? Center(
                 child: SizedBox(
                   width: 24,
