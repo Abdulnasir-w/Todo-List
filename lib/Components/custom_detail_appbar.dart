@@ -40,7 +40,9 @@ class DetailsScreenAppbar extends StatelessWidget
               ),
               InkWell(
                 onTap: () {
-                  const EditTodoScreen().editBottomSheet(context);
+                  EditTodoScreen(
+                    todoId: taskId,
+                  ).editBottomSheet(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/edit.svg",

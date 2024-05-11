@@ -4,7 +4,8 @@ import 'package:to_do_list/Constants/constats.dart';
 import '../../Utils/edit_and_update_todo.dart';
 
 class EditTodoScreen extends StatelessWidget {
-  const EditTodoScreen({super.key});
+  final int todoId;
+  const EditTodoScreen({super.key, required this.todoId});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,9 @@ class EditTodoScreen extends StatelessWidget {
           topRight: Radius.circular(30),
         )),
         builder: (context) {
-          return const EditAndUpdateTodo();
+          return EditAndUpdateTodo(
+            id: todoId,
+          );
         });
   }
 }

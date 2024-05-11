@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
+import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Utils/row_suffixicon.dart';
 
+import '../Constants/constats.dart';
+
 class EditAndUpdateTodo extends StatefulWidget {
-  const EditAndUpdateTodo({super.key});
+  final int id;
+  const EditAndUpdateTodo({super.key, required this.id});
 
   @override
   State<EditAndUpdateTodo> createState() => _EditAndUpdateTodoState();
@@ -20,9 +24,9 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: SizedBox(
         width: double.infinity,
-        height: 722,
+        height: 730,
         child: Padding(
-          padding: const EdgeInsets.only(right: 24, left: 24, top: 20),
+          padding: const EdgeInsets.only(right: 24, left: 24, top: 10),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Form(
@@ -68,7 +72,14 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                     asset: "assets/Icons/image.svg",
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 20,
+                  ),
+                  MyCustomButton(
+                    onPressed: () {},
+                    title: "UPDATE",
+                    color: textColor,
+                    colorText: primaryColor,
+                    isLoading: isLoading,
                   ),
                 ],
               ),

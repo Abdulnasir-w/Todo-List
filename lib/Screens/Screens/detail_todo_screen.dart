@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/custom_detail_appbar.dart';
 import 'package:to_do_list/Constants/constats.dart';
-import 'package:to_do_list/Model/Todo%20Models/upload_image.dart';
 
 class DetailsToDoScreen extends StatefulWidget {
   final int taskId;
@@ -17,31 +16,6 @@ class DetailsToDoScreen extends StatefulWidget {
 }
 
 class _DetailsToDoScreenState extends State<DetailsToDoScreen> {
-  bool isLoading = true;
-  String? imageUrl;
-  String? error;
-
-  void loadImage() async {
-    try {
-      if (widget.todo['image'] != null) {
-        final imageUrlName = await getImageFromFirebase(widget.todo['image']);
-        setState(() {
-          imageUrl = imageUrlName;
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        error = "Failed to load image: ${e.toString()}";
-        isLoading = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,21 +48,7 @@ class _DetailsToDoScreenState extends State<DetailsToDoScreen> {
               const SizedBox(
                 height: 20,
               ),
-              if (isLoading)
-                const Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-                  ),
-                )
-              else if (error != null)
-                Text(
-                  error!,
-                  style: TextStyle(color: Colors.red),
-                )
-              else if (imageUrl != null)
-                Image.network(imageUrl!)
-              else
-                Text("Image is Not available"),
+
               // if (todo['image'] != null)
               //   FutureBuilder<String>(
               //     future: getImageFromFirebase(todo['image']),
