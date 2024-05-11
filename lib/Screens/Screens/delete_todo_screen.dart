@@ -5,7 +5,7 @@ import '../../Utils/delete_and_cancel_button.dart';
 class DeleteTodoScreen extends StatelessWidget {
   const DeleteTodoScreen({super.key});
 
-  deleteBottomSheet(BuildContext context) {
+  void deleteBottomSheet(BuildContext context) {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
