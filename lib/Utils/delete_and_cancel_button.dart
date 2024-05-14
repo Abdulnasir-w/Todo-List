@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/Model/Todo%20Models/delete_model.dart';
 import '../Components/custom_button.dart';
 import '../Constants/constats.dart';
 
 class DeleteAndCancelButton extends StatefulWidget {
-  const DeleteAndCancelButton({super.key});
+  final String id;
+  const DeleteAndCancelButton({super.key, required this.id});
 
   @override
   State<DeleteAndCancelButton> createState() => _DeleteAndCancelButtonState();
@@ -21,7 +23,9 @@ class _DeleteAndCancelButtonState extends State<DeleteAndCancelButton> {
         child: Column(
           children: [
             MyCustomButton(
-              onPressed: () {},
+              onPressed: () {
+                deleteTodoItem(widget.id);
+              },
               title: "DELETE TODO",
               color: textColor,
               colorText: secondryColor,

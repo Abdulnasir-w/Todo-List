@@ -100,7 +100,9 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                     height: 20,
                   ),
                   MyCustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      updateTodoitem();
+                    },
                     title: "UPDATE",
                     color: textColor,
                     colorText: primaryColor,

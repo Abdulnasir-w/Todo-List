@@ -55,7 +55,9 @@ class DetailsScreenAppbar extends StatelessWidget
               ),
               InkWell(
                 onTap: () {
-                  const DeleteTodoScreen().deleteBottomSheet(context);
+                  DeleteTodoScreen(
+                    id: taskId.toString(),
+                  ).deleteBottomSheet(context);
                 },
                 child: SvgPicture.asset(
                   "assets/Icons/trash.svg",
