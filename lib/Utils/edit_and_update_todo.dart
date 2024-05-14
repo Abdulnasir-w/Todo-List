@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_button.dart';
+import 'package:to_do_list/Model/Todo%20Models/todo_data_model.dart';
+import 'package:to_do_list/Model/Todo%20Models/update_model.dart';
 import 'package:to_do_list/Utils/row_suffixicon.dart';
 
 import '../Constants/constats.dart';
+import '../Model/Todo Models/current_data.dart';
 
 class EditAndUpdateTodo extends StatefulWidget {
   final int id;
@@ -18,6 +21,28 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrentData();
+  }
+
+  Future<void> fetchCurrentData() async {
+    TodoItem? currentTodo = await getCurrentTodoItem(widget.id);
+    if (currentTodo != null) {
+      titleController.text = currentTodo.title;
+      descriptionController.text = currentTodo.description;
+    }
+  }
+
+  Future<void> updateTodoitem() async {
+    if (formKey.currentState!.validate()) {
+      await updateTodoItemInFirebase(
+          widget.id, titleController.text, descriptionController.text);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

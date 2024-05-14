@@ -8,7 +8,7 @@ Future<TodoItem?> getCurrentTodoItem(int id) async {
       .get()
       .then((doc) {
     if (doc.exists) {
-      return TodoItem.fromMap(doc.data());
+      return TodoItem.fromMap(doc.data() ?? <String, dynamic>{});
     } else {
       return null;
     }
