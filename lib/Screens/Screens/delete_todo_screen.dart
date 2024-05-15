@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Utils/delete_and_cancel_button.dart';
 
 class DeleteTodoScreen extends StatelessWidget {
-  final String id;
+  final int id;
   const DeleteTodoScreen({super.key, required this.id});
 
   void deleteBottomSheet(BuildContext context) {
