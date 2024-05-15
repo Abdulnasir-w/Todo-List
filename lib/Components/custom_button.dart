@@ -36,7 +36,9 @@ class MyCustomButton extends StatelessWidget {
                   height: 24,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(indicatorColor!),
+                    valueColor: isLoading && indicatorColor != null
+                        ? AlwaysStoppedAnimation<Color>(indicatorColor!)
+                        : AlwaysStoppedAnimation<Color>(color),
                   ),
                 ),
               )

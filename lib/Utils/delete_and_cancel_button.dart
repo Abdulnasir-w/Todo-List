@@ -17,51 +17,50 @@ class _DeleteAndCancelButtonState extends State<DeleteAndCancelButton> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SizedBox(
-          width: double.infinity,
-          height: 150,
-          child: Column(
-            children: [
-              MyCustomButton(
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  try {
-                    await deleteTodoItem(widget.id);
-                    Navigator.pop(context);
-                  } catch (e) {
-                    Navigator.pop(context);
-                    throw Exception(e);
-                  } finally {
-                    setState(() {
-                      isLoading = false;
-                    });
-                  }
-                },
-                title: "DELETE TODO",
-                color: textColor,
-                colorText: secondryColor,
-                isLoading: isLoading,
-                indicatorColor: secondryColor,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              MyCustomButton(
-                onPressed: () {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 150,
+        child: Column(
+          children: [
+            MyCustomButton(
+              key: UniqueKey(),
+              onPressed: () async {
+                setState(() {
+                  isLoading = true;
+                });
+                try {
+                  await deleteTodoItem(widget.id.toString());
                   Navigator.pop(context);
-                },
-                title: "CANCEL",
-                color: textColor,
-                colorText: const Color(0xff00FF19),
-                isLoading: isLoading,
-              ),
-            ],
-          ),
+                } catch (e) {
+                  Navigator.pop(context);
+                  throw Exception(e);
+                } finally {
+                  setState(() {
+                    isLoading = false;
+                  });
+                }
+              },
+              title: "DELETE TODO",
+              color: textColor,
+              colorText: secondryColor,
+              isLoading: isLoading,
+              indicatorColor: secondryColor,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MyCustomButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              title: "CANCEL",
+              color: textColor,
+              colorText: const Color(0xff00FF19),
+              isLoading: isLoading,
+            ),
+          ],
         ),
       ),
     );
