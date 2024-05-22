@@ -144,6 +144,7 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                     color: textColor,
                     colorText: primaryColor,
                     isLoading: isLoading,
+                    indicatorColor: primaryColor,
                   ),
                 ],
               ),
