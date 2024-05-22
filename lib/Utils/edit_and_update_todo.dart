@@ -21,7 +21,8 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
+  String? selectedImagePath;
+  String? selectedDeadline;
   @override
   void initState() {
     super.initState();
@@ -31,15 +32,24 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
   Future<void> fetchCurrentData() async {
     TodoItem? currentTodo = await getCurrentTodoItem(widget.id);
     if (currentTodo != null) {
-      titleController.text = currentTodo.title;
-      descriptionController.text = currentTodo.description;
+      setState(() {
+        titleController.text = currentTodo.title;
+        descriptionController.text = currentTodo.description;
+        selectedDeadline = currentTodo.deadline;
+        selectedImagePath = currentTodo.image;
+      });
     }
   }
 
   Future<void> updateTodoitem() async {
     if (formKey.currentState!.validate()) {
       await updateTodoItemInFirebase(
-          widget.id, titleController.text, descriptionController.text);
+        widget.id,
+        titleController.text,
+        descriptionController.text,
+        selectedDeadline,
+        selectedImagePath,
+      );
     }
   }
 
@@ -85,23 +95,50 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const MyRowSuffix(
+                  MyRowSuffix(
                     title: "Deadline (Optional)",
                     asset: "assets/Icons/calendar.svg",
+                    onDateSelected: (date) {
+                      setState(() {
+                        selectedDeadline = date;
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const MyRowSuffix(
+                  MyRowSuffix(
                     title: "Image (Optional)",
                     asset: "assets/Icons/image.svg",
+                    onImageSelected: (imagePath) {
+                      setState(() {
+                        selectedImagePath = imagePath;
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   MyCustomButton(
-                    onPressed: () {
-                      updateTodoitem();
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        try {
+                          await updateTodoitem();
+                          Navigator.pop(context, true);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Failed to update todo: $e')),
+                          );
+                        } finally {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      }
                     },
                     title: "UPDATE",
                     color: textColor,
