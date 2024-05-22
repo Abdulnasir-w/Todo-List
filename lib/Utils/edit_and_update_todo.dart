@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Model/Todo%20Models/todo_data_model.dart';
 import 'package:to_do_list/Model/Todo%20Models/update_model.dart';
+import 'package:to_do_list/Screens/Screens/home_screen.dart';
 import 'package:to_do_list/Utils/row_suffixicon.dart';
 
 import '../Constants/constats.dart';
@@ -127,7 +130,11 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                         });
                         try {
                           await updateTodoitem();
-                          Navigator.pop(context, true);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomeScreen()),
+                              (route) => false);
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
