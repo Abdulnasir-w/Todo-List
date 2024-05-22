@@ -6,18 +6,36 @@ import "package:to_do_list/Constants/constats.dart";
 import "package:to_do_list/Model/Todo%20Models/fetch_data_model.dart";
 import "package:to_do_list/Screens/Screens/detail_todo_screen.dart";
 
-class ListOfCards extends StatelessWidget {
+class ListOfCards extends StatefulWidget {
   const ListOfCards({super.key});
 
   @override
+  State<ListOfCards> createState() => _ListOfCardsState();
+}
+
+class _ListOfCardsState extends State<ListOfCards> {
+  late FetchData fetchData;
+  late Future<List<Map<String, dynamic>>> futureTodos;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData = FetchData();
+    futureTodos = fetchData.getUserTodos();
+  }
+
+  Future<void> refreshTodos() async {
+    setState(() {
+      futureTodos = fetchData.getUserTodos();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    FetchData fetchData = FetchData();
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.77,
       child: RefreshIndicator(
-        onRefresh: () async {
-          await fetchData.getUserTodos();
-        },
+        onRefresh: refreshTodos,
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: fetchData.getUserTodos(),
           builder: (context, snapshot) {
