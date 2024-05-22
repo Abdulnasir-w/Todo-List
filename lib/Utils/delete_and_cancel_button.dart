@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:to_do_list/Model/Todo%20Models/delete_model.dart';
+import 'package:to_do_list/Screens/Screens/home_screen.dart';
 import '../Components/custom_button.dart';
 import '../Constants/constats.dart';
 
@@ -32,7 +33,11 @@ class _DeleteAndCancelButtonState extends State<DeleteAndCancelButton> {
                 });
                 try {
                   await deleteTodoItem(widget.id.toString());
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                      (route) => false);
                 } catch (e) {
                   Navigator.pop(context);
                   throw Exception(e);

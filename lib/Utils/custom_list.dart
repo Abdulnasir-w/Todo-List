@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:intl/intl.dart";
 import "package:to_do_list/Components/custom_deadline.dart";
 import "package:to_do_list/Constants/constats.dart";
@@ -28,6 +29,8 @@ class _ListOfCardsState extends State<ListOfCards> {
     setState(() {
       futureTodos = fetchData.getUserTodos();
     });
+
+    Fluttertoast.showToast(msg: "Refresh");
   }
 
   @override
@@ -35,6 +38,7 @@ class _ListOfCardsState extends State<ListOfCards> {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.77,
       child: RefreshIndicator(
+        color: primaryColor,
         onRefresh: refreshTodos,
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: fetchData.getUserTodos(),
