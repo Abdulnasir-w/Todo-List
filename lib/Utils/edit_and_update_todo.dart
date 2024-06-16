@@ -5,6 +5,7 @@ import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Model/Todo%20Models/todo_data_model.dart';
 import 'package:to_do_list/Model/Todo%20Models/update_model.dart';
+import 'package:to_do_list/Model/Todo%20Models/upload_image.dart';
 import 'package:to_do_list/Screens/Screens/home_screen.dart';
 import 'package:to_do_list/Utils/row_suffixicon.dart';
 
@@ -24,8 +25,17 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  String? selectedImagePath;
+  String? selectedImage;
   String? selectedDeadline;
+  String? imageName;
+
+  void updateSelectedImage(String image) {
+    setState(() {
+      selectedImage = image;
+      imageName = image.split("/").last;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,7 +49,9 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
         titleController.text = currentTodo.title;
         descriptionController.text = currentTodo.description;
         selectedDeadline = currentTodo.deadline;
-        selectedImagePath = currentTodo.image;
+        selectedImage = currentTodo.image;
+        print('Fetched deadline: $selectedDeadline'); // Debugging print
+        print('Fetched image path: $selectedImage');
       });
     }
   }
@@ -51,7 +63,7 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
         titleController.text,
         descriptionController.text,
         selectedDeadline,
-        selectedImagePath,
+        imageName,
       );
     }
   }
@@ -101,6 +113,7 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                   MyRowSuffix(
                     title: "Deadline (Optional)",
                     asset: "assets/Icons/calendar.svg",
+                    initialValue: selectedDeadline,
                     onDateSelected: (date) {
                       setState(() {
                         selectedDeadline = date;
@@ -111,13 +124,10 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                     height: 15,
                   ),
                   MyRowSuffix(
-                    title: "Image (Optional)",
+                    title: "Add Image (Optional)",
                     asset: "assets/Icons/image.svg",
-                    onImageSelected: (imagePath) {
-                      setState(() {
-                        selectedImagePath = imagePath;
-                      });
-                    },
+                    initialValue: selectedImage,
+                    onImageSelected: updateSelectedImage,
                   ),
                   const SizedBox(
                     height: 20,
@@ -129,6 +139,12 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                           isLoading = true;
                         });
                         try {
+                          String getImageName = imageName ?? "";
+                          if (selectedImage != null) {
+                            uploadToFirebaseStorage(
+                                selectedImage, getImageName);
+                          }
+
                           await updateTodoitem();
                           Navigator.pushAndRemoveUntil(
                               context,

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:to_do_list/Components/custom_appbar.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Constants/constats.dart';
 import 'package:to_do_list/Model/Auth/sign_up_model.dart';

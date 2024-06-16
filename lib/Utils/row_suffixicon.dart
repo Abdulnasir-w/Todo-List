@@ -14,6 +14,7 @@ class MyRowSuffix extends StatefulWidget {
   final Function(String)? onImageSelected;
   final Function(String)? onDateSelected;
   final Function(String)? imageName;
+  final String? initialValue;
 
   const MyRowSuffix({
     super.key,
@@ -22,6 +23,7 @@ class MyRowSuffix extends StatefulWidget {
     this.onDateSelected,
     this.onImageSelected,
     this.imageName,
+    this.initialValue,
   });
 
   @override
@@ -31,6 +33,29 @@ class MyRowSuffix extends StatefulWidget {
 class _MyRowSuffixState extends State<MyRowSuffix> {
   String? dateSelect = "";
   String imageName = "";
+  String? displayText;
+
+  @override
+  void initState() {
+    super.initState();
+    displayText = widget.initialValue != null
+        ? widget.initialValue!.split('/').last
+        : widget.title;
+  }
+
+  @override
+  void didUpdateWidget(covariant MyRowSuffix oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != oldWidget.initialValue) {
+      setState(() {
+        displayText = widget.initialValue != null
+            ? widget.initialValue!.split('/').last
+            : widget.title;
+      });
+      print(
+          'Initial value in didUpdateWidget: ${widget.initialValue}'); // Debugging print
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +76,7 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              (dateSelect != null && dateSelect!.isNotEmpty)
-                  ? dateSelect!
-                  : (imageName.isNotEmpty ? imageName : widget.title),
+              displayText!,
               style: addHintStyle,
             ),
             GestureDetector(
