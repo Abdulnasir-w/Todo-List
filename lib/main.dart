@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeAnimationStyle: AnimationStyle(
+          curve: Curves.bounceIn, reverseCurve: Curves.bounceInOut),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         //useMaterial3: true,

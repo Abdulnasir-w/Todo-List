@@ -23,7 +23,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldbg,
-      appBar: const CustomAppbar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: const Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
+        title: Center(
+          child: SvgPicture.asset(
+            "assets/Logo/banner.svg",
+            width: 80,
+            height: 30,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 30),
         child: Column(

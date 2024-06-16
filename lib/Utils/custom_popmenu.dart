@@ -54,7 +54,11 @@ class _CustomPopMenuButtonState extends State<CustomPopMenuButton> {
           ),
         ),
       ],
-      child: SvgPicture.asset("assets/Icons/filter.svg"),
+      child: SvgPicture.asset(
+        "assets/Icons/filter.svg",
+        width: 24,
+        height: 24,
+      ),
     );
   }
 }
