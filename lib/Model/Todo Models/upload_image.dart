@@ -13,7 +13,8 @@ uploadToFirebaseStorage(path, String name) async {
 /// Download Image Url From Firebase Storage
 Future<String> getImageFromFirebase(String imagePath) async {
   try {
-    Reference reference = FirebaseStorage.instance.ref().child(imagePath);
+    Reference reference =
+        FirebaseStorage.instance.ref().child("Images/$imagePath");
     String downloadUrl = await reference.getDownloadURL();
     return downloadUrl;
   } catch (e) {

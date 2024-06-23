@@ -50,8 +50,6 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
         descriptionController.text = currentTodo.description;
         selectedDeadline = currentTodo.deadline;
         selectedImage = currentTodo.image;
-        print('Fetched deadline: $selectedDeadline'); // Debugging print
-        print('Fetched image path: $selectedImage');
       });
     }
   }

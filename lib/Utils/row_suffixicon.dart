@@ -52,8 +52,6 @@ class _MyRowSuffixState extends State<MyRowSuffix> {
             ? widget.initialValue!.split('/').last
             : widget.title;
       });
-      print(
-          'Initial value in didUpdateWidget: ${widget.initialValue}'); // Debugging print
     }
   }
 

@@ -30,7 +30,7 @@ class Deadline {
       items: [
         PopupMenuItem(
           height: 7,
-          labelTextStyle: MaterialStateProperty.all(titleStyle),
+          labelTextStyle: WidgetStateProperty.all(titleStyle),
           child: Text(deadline ?? "No Deadline"),
         ),
       ],
