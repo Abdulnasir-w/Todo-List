@@ -68,6 +68,34 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
     }
   }
 
+  Future<void> editAndUpdateTodo() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        String getImageName = imageName ?? "";
+        if (selectedImage != null) {
+          uploadToFirebaseStorage(selectedImage, getImageName);
+        }
+
+        await updateTodoitem();
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (route) => false);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to update todo: $e')),
+        );
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -133,36 +161,7 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
                     height: 20,
                   ),
                   MyCustomButton(
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        try {
-                          String getImageName = imageName ?? "";
-                          if (selectedImage != null) {
-                            uploadToFirebaseStorage(
-                                selectedImage, getImageName);
-                          }
-
-                          await updateTodoitem();
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()),
-                              (route) => false);
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text('Failed to update todo: $e')),
-                          );
-                        } finally {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
-                      }
-                    },
+                    onPressed: editAndUpdateTodo,
                     title: "UPDATE",
                     color: textColor,
                     colorText: primaryColor,

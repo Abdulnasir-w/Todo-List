@@ -36,7 +36,36 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   void updateSelectedImage(String image) {
     setState(() {
       selectedImage = image;
+      imageName = image.split("/").last;
     });
+  }
+
+  Future<void> addTodo() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        String getImageName = imageName ?? "";
+        if (selectedImage != null) {
+          await uploadToFirebaseStorage(selectedImage!, getImageName);
+        }
+        await AddTodo().addTodo(
+          titleController.text,
+          descriptionController.text,
+          selectedDate,
+          getImageName,
+          DateTime.now(),
+        );
+        Navigator.pop(context);
+      } catch (e) {
+        throw Exception(e);
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -94,6 +123,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                       title: 'Deadline (Optional)',
                       asset: "assets/Icons/calendar.svg",
                       onDateSelected: updateSelectedDate,
+                      initialValue: selectedDate,
                     ),
                     const SizedBox(
                       height: 20,
@@ -102,44 +132,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                       title: 'Add Image (Optional)',
                       asset: "assets/Icons/image.svg",
                       onImageSelected: updateSelectedImage,
-                      imageName: (name) {
-                        setState(() {
-                          imageName = name;
-                        });
-                      },
+                      initialValue: imageName,
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     MyCustomButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          try {
-                            String getImageName = imageName ?? "";
-                            if (selectedImage != null) {
-                              await uploadToFirebaseStorage(
-                                  selectedImage!, getImageName);
-                            }
-                            await AddTodo().addTodo(
-                              titleController.text,
-                              descriptionController.text,
-                              selectedDate,
-                              getImageName,
-                              DateTime.now(),
-                            );
-                            Navigator.pop(context);
-                          } catch (e) {
-                            throw Exception(e);
-                          } finally {
-                            setState(() {
-                              isLoading = false;
-                            });
-                          }
-                        }
-                      },
+                      onPressed: addTodo,
                       title: "ADD TODO",
                       color: Colors.white,
                       colorText: primaryColor,
