@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Model/Todo%20Models/delete_model.dart';
 import 'package:to_do_list/Screens/Screens/home_screen.dart';
 import '../Components/custom_button.dart';
@@ -38,6 +39,10 @@ class _DeleteAndCancelButtonState extends State<DeleteAndCancelButton> {
                       MaterialPageRoute(
                           builder: (context) => const HomeScreen()),
                       (route) => false);
+                  Fluttertoast.showToast(
+                      msg: "Deleted Successfully",
+                      backgroundColor: primaryColor,
+                      textColor: textColor);
                 } catch (e) {
                   Navigator.pop(context);
                   throw Exception(e);

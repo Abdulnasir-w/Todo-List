@@ -122,7 +122,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                   passwordController.text,
                                 );
                                 Fluttertoast.showToast(
-                                    msg: "Login Successfully");
+                                    msg: "Login Successfully",
+                                    backgroundColor: primaryColor,
+                                    textColor: textColor);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

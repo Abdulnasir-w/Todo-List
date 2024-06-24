@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:to_do_list/Components/adding_textfield.dart';
 import 'package:to_do_list/Components/custom_button.dart';
 import 'package:to_do_list/Model/Todo%20Models/todo_data_model.dart';
@@ -82,10 +83,15 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
             context,
             MaterialPageRoute(builder: (context) => const HomeScreen()),
             (route) => false);
+        Fluttertoast.showToast(
+            msg: "Updated Successfully",
+            backgroundColor: primaryColor,
+            textColor: textColor);
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to update todo: $e')),
-        );
+        Fluttertoast.showToast(
+            msg: "Failed To Update Todo: $e",
+            backgroundColor: primaryColor,
+            textColor: textColor);
       } finally {
         setState(() {
           isLoading = false;

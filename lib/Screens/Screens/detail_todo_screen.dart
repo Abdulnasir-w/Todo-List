@@ -42,7 +42,7 @@ class _DetailsToDoScreenState extends State<DetailsToDoScreen> {
         imageUrl = url;
       });
     } catch (e) {
-      print('Error fetching image URL: $e');
+      throw Exception(e);
     }
   }
 
@@ -50,8 +50,7 @@ class _DetailsToDoScreenState extends State<DetailsToDoScreen> {
     try {
       return await getImageFromFirebase(imagePath);
     } catch (e) {
-      print("Error fetching image URL: $e");
-      return null;
+      throw Exception(e);
     }
   }
 

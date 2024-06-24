@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_list/Constants/constats.dart';
 
 Future<void> deleteTodoItem(String id) async {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -11,11 +12,23 @@ Future<void> deleteTodoItem(String id) async {
       CollectionReference<Map<String, dynamic>> userTasks =
           firestore.collection("users").doc(user.uid).collection("Tasks");
       await userTasks.doc(id).delete();
-      Fluttertoast.showToast(msg: "Successfully Deleted");
+      Fluttertoast.showToast(
+        msg: "Successfully Deleted",
+        backgroundColor: primaryColor,
+        textColor: textColor,
+      );
     } else {
-      Fluttertoast.showToast(msg: "User Not Found");
+      Fluttertoast.showToast(
+        msg: "User Not Found",
+        backgroundColor: primaryColor,
+        textColor: textColor,
+      );
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "$e");
+    Fluttertoast.showToast(
+      msg: "$e",
+      backgroundColor: primaryColor,
+      textColor: textColor,
+    );
   }
 }

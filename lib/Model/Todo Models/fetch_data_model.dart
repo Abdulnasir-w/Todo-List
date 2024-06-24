@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_list/Constants/constats.dart';
 
 class FetchData {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -17,7 +18,11 @@ class FetchData {
         userTodos = snapshot.docs.map((doc) => doc.data()).toList();
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "Loading Error");
+      Fluttertoast.showToast(
+        msg: "Loading Error",
+        backgroundColor: primaryColor,
+        textColor: textColor,
+      );
     }
     return userTodos;
   }
@@ -40,7 +45,11 @@ class FetchData {
         }
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "Loading Error");
+      Fluttertoast.showToast(
+        msg: "Loading Error",
+        backgroundColor: primaryColor,
+        textColor: textColor,
+      );
     }
     return deadline;
   }

@@ -30,7 +30,8 @@ class _ListOfCardsState extends State<ListOfCards> {
       futureTodos = fetchData.getUserTodos();
     });
 
-    Fluttertoast.showToast(msg: "Refresh");
+    Fluttertoast.showToast(
+        msg: "Refresh", backgroundColor: primaryColor, textColor: textColor);
   }
 
   @override

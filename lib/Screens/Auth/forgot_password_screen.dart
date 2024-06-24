@@ -79,8 +79,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               await Future.delayed(const Duration(seconds: 3));
                               Navigator.pop(context);
                               Fluttertoast.showToast(
-                                  msg:
-                                      "Reset Email Has Been Sent Plz check your Email.");
+                                msg:
+                                    "Reset Email Has Been Sent Plz check your Email.",
+                                backgroundColor: primaryColor,
+                                textColor: textColor,
+                              );
                             } catch (e) {
                               rethrow;
                             } finally {

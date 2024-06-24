@@ -88,7 +88,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 await ChangePassword()
                                     .passwordChange(passwordController.text);
                                 Fluttertoast.showToast(
-                                    msg: "Password Change Scuccessfully");
+                                  msg: "Password Change Scuccessfully",
+                                  backgroundColor: primaryColor,
+                                  textColor: textColor,
+                                );
                               } catch (e) {
                                 throw Exception(e);
                               } finally {
@@ -104,7 +107,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 isLoading = false;
                               });
                               Fluttertoast.showToast(
-                                  msg: "Password Doesn't Match");
+                                msg: "Password Doesn't Match",
+                                backgroundColor: primaryColor,
+                                textColor: textColor,
+                              );
                             }
                           }
                         },

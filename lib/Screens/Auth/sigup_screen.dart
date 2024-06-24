@@ -133,7 +133,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   passwordController.text,
                                 );
                                 Fluttertoast.showToast(
-                                    msg: "Account Created Successfully");
+                                  msg: "Account Created Successfully",
+                                  backgroundColor: primaryColor,
+                                  textColor: textColor,
+                                );
                                 Navigator.push(
                                   // ignore: use_build_context_synchronously
                                   context,
@@ -143,7 +146,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 );
                               } catch (e) {
                                 Fluttertoast.showToast(
-                                    msg: "Cannot Create Account . Sorry!");
+                                  msg: "Cannot Create Account . Sorry!",
+                                  backgroundColor: primaryColor,
+                                  textColor: textColor,
+                                );
                               } finally {
                                 setState(() {
                                   isLoading = false;
@@ -151,7 +157,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               }
                             } else {
                               Fluttertoast.showToast(
-                                  msg: "Password is not Matching.");
+                                msg: "Password is not Matching.",
+                                backgroundColor: primaryColor,
+                                textColor: textColor,
+                              );
                               setState(() {
                                 isLoading = false;
                               });
