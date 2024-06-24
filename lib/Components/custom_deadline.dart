@@ -22,6 +22,8 @@ class Deadline {
       useRootNavigator: false,
       context: context,
       position: RelativeRect.fromLTRB(
+        // 55, 80, 34, 34,
+
         position.dx + button.size.height,
         position.dy +
             button
@@ -31,13 +33,13 @@ class Deadline {
             button.size.width, // Adjust the right edge position
         overlay.size.height -
             position.dy -
-            button.size.height / 2, // Adjust the bottom edge position
+            button.size.height, // Adjust the bottom edge position
       ),
       items: [
         PopupMenuItem(
           height: 7,
           labelTextStyle: WidgetStateProperty.all(titleStyle),
-          child: Text(deadline ?? "No Deadline"),
+          child: Center(child: Text(deadline ?? "No Deadline")),
         ),
       ],
       popUpAnimationStyle: AnimationStyle(
