@@ -22,10 +22,16 @@ class Deadline {
       useRootNavigator: false,
       context: context,
       position: RelativeRect.fromLTRB(
-        position.dx,
-        position.dy,
-        position.dx,
-        position.dy,
+        position.dx + button.size.height,
+        position.dy +
+            button
+                .size.height, // Adjust the dy value to position below the icon
+        overlay.size.width -
+            position.dx -
+            button.size.width, // Adjust the right edge position
+        overlay.size.height -
+            position.dy -
+            button.size.height / 2, // Adjust the bottom edge position
       ),
       items: [
         PopupMenuItem(
@@ -36,7 +42,6 @@ class Deadline {
       ],
       popUpAnimationStyle: AnimationStyle(
         curve: Curves.ease,
-        //reverseCurve: Curves.easeInBack,
       ),
     );
   }

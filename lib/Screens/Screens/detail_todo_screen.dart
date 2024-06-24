@@ -50,7 +50,7 @@ class _DetailsToDoScreenState extends State<DetailsToDoScreen> {
     try {
       return await getImageFromFirebase(imagePath);
     } catch (e) {
-      throw Exception(e);
+      return null;
     }
   }
 
