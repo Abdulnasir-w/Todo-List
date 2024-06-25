@@ -69,6 +69,13 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   }
 
   @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldbg,

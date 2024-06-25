@@ -29,6 +29,12 @@ class _EditAndUpdateTodoState extends State<EditAndUpdateTodo> {
   String? selectedImage;
   String? selectedDeadline;
   String? imageName;
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   void updateSelectedImage(String image) {
     setState(() {

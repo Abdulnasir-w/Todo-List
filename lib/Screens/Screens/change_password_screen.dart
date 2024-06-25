@@ -19,6 +19,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool isLoading = false;
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    confirmPasswordController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
